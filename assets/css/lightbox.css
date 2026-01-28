@@ -1,0 +1,52 @@
+/* assets/css/lightbox.css - overlay and controls */
+.lightbox-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.88);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 2000;
+}
+.lightbox-overlay.open { display:flex; }
+
+.lightbox-image {
+  max-width: 90%;
+  max-height: 80%;
+  border-radius: 6px;
+  box-shadow: 0 12px 40px rgba(0,0,0,0.8);
+}
+
+.lightbox-caption {
+  position: absolute;
+  bottom: 36px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: 'Lora', serif;
+  font-size: 1rem;
+  color: #dcdcdc;
+  max-width: 80%;
+  text-align: center;
+}
+
+.lightbox-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 3rem;
+  color: #d6a86a;
+  cursor: pointer;
+  user-select: none;
+  padding: 0 1rem;
+}
+.lightbox-arrow.left { left: 20px; }
+.lightbox-arrow.right { right: 20px; }
+
+.lightbox-close {
+  position: absolute;
+  top: 18px;
+  right: 28px;
+  font-size: 2rem;
+  color: #d6a86a;
+  cursor: pointer;
+}
