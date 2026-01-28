@@ -1,42 +1,100 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <!-- head will be injected by includes.js from /includes/head.html -->
+  <!-- head content (meta, fonts, CSS) will be injected by /assets/js/includes.js from /includes/head.html -->
 </head>
 <body>
   <div class="page-container">
+
+    <!-- Header will be injected here -->
     <div id="site-header"></div>
 
-    <!-- PAGE CONTENT -->
+    <!-- HERO -->
     <main>
-      <section class="hero">
+      <section class="hero" aria-labelledby="home-title">
         <img src="/images/ww-logo-clean2-201.jpg" alt="Windwood Designs Logo" class="hero-logo">
-        <p class="hero-tagline">My woodworking from the 80’s and 90’s to the present.</p>
+
+        <p class="hero-tagline">
+          My woodworking from the 80’s and 90’s to the present.
+        </p>
+
+        <div class="divider" aria-hidden="true">
+          <div class="divider-line"></div>
+          <div class="divider-line center"></div>
+          <div class="divider-line"></div>
+        </div>
       </section>
 
-      <h2 class="page-title">Windwood Woodworking</h2>
-      <p class="page-description">
-        Welcome to my workshop. I build custom furniture, fine woodworking pieces, and CNC‑carved designs that blend traditional craft with modern tools.
-      </p>
+      <!-- INTRO -->
+      <section class="page-intro" id="home-intro">
+        <h1 id="home-title" class="page-title">Windwood Woodworking</h1>
 
-      <section>
-        <h3 class="section-title">What I Make</h3>
+        <p class="page-description">
+          Welcome to my workshop.<br>
+          I build custom furniture, fine woodworking pieces, and CNC‑carved designs that blend traditional craft with modern tools.
+        </p>
+      </section>
+
+      <!-- WHAT I MAKE -->
+      <section class="homepage-section" aria-labelledby="what-i-make">
+        <h2 id="what-i-make" class="section-title">What I Make</h2>
+
         <ul class="homepage-list">
           <li>Furniture</li>
           <li>Unique boxes</li>
           <li>CNC relief carvings</li>
           <li>Mirror frames and wall art</li>
+          <li>Bespoke woodwork</li>
         </ul>
+      </section>
+
+      <!-- PHILOSOPHY -->
+      <section class="homepage-section" aria-labelledby="philosophy">
+        <h2 id="philosophy" class="section-title">Philosophy</h2>
+
+        <p class="philosophy-text">
+          Wood tells the truth.<br><br>
+          Meaning arrives slowly, like dew settling on a morning surface.
+          Notice the small pull and follow it without explanation.
+          A felt direction is often truer than a planned route.<br><br>
+          Listen for the quiet thread that asks to be followed.
+          Form appears when attention softens and stays present.
+          Resonance is a gentle alignment, not a loud proclamation.<br><br>
+          Discovery happens in the space between looking and doing.
+          Truth often arrives as a subtle confirmation, not a revelation.
+          The world offers hints; we only need to be willing to receive them.<br><br>
+          Presence shapes what unfolds, one quiet gesture at a time.<br><br>
+          Every board has a story — grain, tension, scars, and surprises.
+          My job is to listen, shape, and reveal what’s already there.
+        </p>
+      </section>
+
+      <!-- CURRENT PROJECTS -->
+      <section class="homepage-section" aria-labelledby="projects">
+        <h2 id="projects" class="section-title">Current Projects</h2>
+
+        <ul class="homepage-list">
+          <li>Updating my CNC workflow</li>
+          <li>Designing a new line of small‑batch boxes</li>
+          <li>Photographing past builds for the gallery</li>
+        </ul>
+      </section>
+
+      <!-- CONTACT -->
+      <section class="homepage-section" aria-labelledby="contact">
+        <h2 id="contact" class="section-title">Contact</h2>
+        <p class="page-description">More coming soon.</p>
       </section>
     </main>
 
+    <!-- Footer will be injected here -->
     <div id="site-footer"></div>
-  </div>
+  </div><!-- /.page-container -->
 
-  <!-- Back to top -->
-  <a id="back-to-top" href="#">Top</a>
+  <!-- Back to top (UI script toggles .visible) -->
+  <a id="back-to-top" href="#" aria-label="Back to top">Top</a>
 
-  <!-- Includes loader and UI scripts -->
+  <!-- Includes loader and UI scripts (deferred) -->
   <script src="/assets/js/includes.js" defer></script>
   <script src="/assets/js/ui.js" defer></script>
 </body>
