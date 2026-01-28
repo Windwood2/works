@@ -1,6 +1,20 @@
 // assets/js/includes.js
-// Loads header/footer/head into placeholders and initializes UI
+// Dynamically detect the correct base path (e.g., /works/) so includes load correctly
+
 (async function () {
+
+  // Detect base path from current URL
+  // Example: https://windwood2.github.io/works/boxes.html
+  // pathname = "/works/boxes.html" → base = "/works/"
+  const path = window.location.pathname;
+  const parts = path.split('/').filter(Boolean);
+  let base = '/';
+
+  if (parts.length > 0) {
+    // If first segment is the repo name, use it as base
+    base = '/' + parts[0] + '/';
+  }
+
   async function load(url, selector) {
     try {
       const res = await fetch(url);
@@ -8,20 +22,19 @@
       const html = await res.text();
       const container = document.querySelector(selector);
       if (container) container.innerHTML = html;
-      return true;
     } catch (e) {
-      console.warn('Include load failed', url, e);
-      return false;
+      console.warn('Include load failed:', url, e);
     }
   }
 
-  // Root paths (B1): adjust only if you later host under a subpath
-  await load('/includes/head.html', 'head');
-  await load('/includes/header.html', '#site-header');
-  await load('/includes/footer.html', '#site-footer');
+  // Load includes using the detected base path
+  await load(base + 'includes/head.html', 'head');
+  await load(base + 'includes/header.html', '#site-header');
+  await load(base + 'includes/footer.html', '#site-footer');
 
-  // Small delay to ensure DOM updated before initializing UI
+  // Initialize UI after injection
   setTimeout(() => {
     if (window.initWindwoodUI) window.initWindwoodUI();
   }, 60);
+
 })();
