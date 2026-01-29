@@ -1,11 +1,9 @@
 // assets/js/includes.js
-// Automatically detect the correct base path (e.g., /works/) so includes load correctly
+// Load header and footer using dynamic base detection
 
 (async function () {
 
   // Detect base path from current URL
-  // Example: https://windwood2.github.io/works/boxes.html
-  // pathname = "/works/boxes.html" → base = "/works/"
   const path = window.location.pathname;
   const parts = path.split('/').filter(Boolean);
   let base = '/';
@@ -26,8 +24,7 @@
     }
   }
 
-  // Load includes using the detected base path
-  await load(base + 'includes/head.html', 'head');
+  // Load ONLY header and footer (head is no longer injected)
   await load(base + 'includes/header.html', '#site-header');
   await load(base + 'includes/footer.html', '#site-footer');
 
@@ -37,3 +34,4 @@
   }, 60);
 
 })();
+
