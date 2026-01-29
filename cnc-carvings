@@ -1,1 +1,303 @@
-.gitkeep
+<!doctype html>
+<html lang="en">
+<head>
+  <div id="site-head"></div>
+  <script src="assets/js/includes.js" defer></script>
+
+  <!-- Fallback metadata -->
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>CNC Carvings — Windwood Designs</title>
+</head>
+
+<body>
+  <div class="page-container">
+
+    <!-- Header (injected) -->
+    <div id="site-header"></div>
+
+    <!-- PAGE CONTENT -->
+    <main class="gallery-page">
+      <h1 class="page-title">CNC Carvings</h1>
+      <p class="page-description">
+        Relief carvings in wood — landscapes, textures, symbols, and sculptural forms.
+      </p>
+    </main>
+
+    <!-- DIVIDER -->
+    <div class="divider" aria-hidden="true">
+      <div class="divider-line"></div>
+      <div class="divider-line center"></div>
+      <div class="divider-line"></div>
+    </div>
+
+    <!-- 104 -->
+    <section class="gallery" aria-label="Grand Canyon carving">
+      <figure class="image-card">
+        <img
+          src="images/ww-cnc-carving-051.jpg"
+          alt="Grand Canyon carving"
+          class="lightbox-thumb"
+          loading="lazy"
+          data-caption="The Grand Canyon carved in an old Mahogany board."
+        >
+        <figcaption class="caption">
+          The Grand Canyon carved in an old Mahogany board.
+        </figcaption>
+      </figure>
+    </section>
+
+    <div class="divider" aria-hidden="true">
+      <div class="divider-line"></div>
+      <div class="divider-line center"></div>
+      <div class="divider-line"></div>
+    </div>
+
+    <!-- 110 -->
+    <section class="gallery" aria-label="Elm landscape carving">
+      <figure class="image-card">
+        <img
+          src="images/ww-cnc-carving-054.jpg"
+          alt="Elm landscape carving"
+          class="lightbox-thumb"
+          loading="lazy"
+          data-caption="Carved Elm board with a magical AI generated landscape."
+        >
+        <figcaption class="caption">
+          Carved Elm board with a magical AI generated landscape.
+        </figcaption>
+      </figure>
+    </section>
+
+    <div class="divider" aria-hidden="true">
+      <div class="divider-line"></div>
+      <div class="divider-line center"></div>
+      <div class="divider-line"></div>
+    </div>
+
+    <!-- 109 -->
+    <section class="gallery" aria-label="Yew branch sayings">
+      <figure class="image-card">
+        <img
+          src="images/ww-cnc-carving-050.jpg"
+          alt="Yew branch carving"
+          class="lightbox-thumb"
+          loading="lazy"
+          data-caption="Two halves of a Yew branch carved with favorite sayings. All natural color."
+        >
+        <figcaption class="caption">
+          Two halves of a Yew branch carved with favorite sayings. All natural color.
+        </figcaption>
+      </figure>
+    </section>
+
+    <div class="divider" aria-hidden="true">
+      <div class="divider-line"></div>
+      <div class="divider-line center"></div>
+      <div class="divider-line"></div>
+    </div>
+
+    <!-- 108 -->
+    <section class="gallery" aria-label="Walnut welcome signs">
+      <figure class="image-card">
+        <img
+          src="images/ww-cnc-carving-035.jpg"
+          alt="Walnut welcome signs"
+          class="lightbox-thumb"
+          loading="lazy"
+          data-caption="Welcome signs for a home, carved in Walnut. Glass inlaid tiles."
+        >
+        <figcaption class="caption">
+          Welcome signs for a home, carved in Walnut. Glass inlaid tiles.
+        </figcaption>
+      </figure>
+    </section>
+
+    <div class="divider" aria-hidden="true">
+      <div class="divider-line"></div>
+      <div class="divider-line center"></div>
+      <div class="divider-line"></div>
+    </div>
+
+    <!-- 102 -->
+    <section class="gallery" aria-label="Steampunk bees carving">
+      <figure class="image-card">
+        <img
+          src="images/ww-cnc-carving-038.jpg"
+          alt="Steampunk bees carving"
+          class="lightbox-thumb"
+          loading="lazy"
+          data-caption="Carved Steampunk bees in Walnut."
+        >
+        <figcaption class="caption">
+          Carved Steampunk bees in Walnut.
+        </figcaption>
+      </figure>
+    </section>
+
+    <div class="divider" aria-hidden="true">
+      <div class="divider-line"></div>
+      <div class="divider-line center"></div>
+      <div class="divider-line"></div>
+    </div>
+
+    <!-- 101 -->
+    <section class="gallery" aria-label="Monogram letters carving">
+      <figure class="image-card">
+        <img
+          src="images/ww-cnc-carving-031.jpg"
+          alt="Monogram letters carving"
+          class="lightbox-thumb"
+          loading="lazy"
+          data-caption="Initials or monogram letters carved in Walnut with gold accents."
+        >
+        <figcaption class="caption">
+          Initials or monogram letters carved in Walnut with gold accents.
+        </figcaption>
+      </figure>
+    </section>
+
+    <div class="divider" aria-hidden="true">
+      <div class="divider-line"></div>
+      <div class="divider-line center"></div>
+      <div class="divider-line"></div>
+    </div>
+
+    <!-- 098 -->
+    <section class="gallery" aria-label="Mt. Rainier relief carving">
+      <figure class="image-card">
+        <img
+          src="images/ww-cnc-carving-030.jpg"
+          alt="Mt. Rainier relief carving"
+          class="lightbox-thumb"
+          loading="lazy"
+          data-caption="Relief carving to scale of Mt. Rainier. Mahogany. 20 inches square."
+        >
+        <figcaption class="caption">
+          Relief carving to scale of Mt. Rainier. Mahogany. 20 inches square.
+        </figcaption>
+      </figure>
+    </section>
+
+    <div class="divider" aria-hidden="true">
+      <div class="divider-line"></div>
+      <div class="divider-line center"></div>
+      <div class="divider-line"></div>
+    </div>
+
+    <!-- 099 -->
+    <section class="gallery" aria-label="Walnut spiral doodles">
+      <figure class="image-card">
+        <img
+          src="images/ww-cnc-carving-022.jpg"
+          alt="Walnut spiral doodles"
+          class="lightbox-thumb"
+          loading="lazy"
+          data-caption="Some fun spiral doodles in Walnut."
+        >
+        <figcaption class="caption">
+          Some fun spiral doodles in Walnut.
+        </figcaption>
+      </figure>
+    </section>
+
+    <div class="divider" aria-hidden="true">
+      <div class="divider-line"></div>
+      <div class="divider-line center"></div>
+      <div class="divider-line"></div>
+    </div>
+
+    <!-- 113 -->
+    <section class="gallery" aria-label="Walnut footprint carving">
+      <figure class="image-card">
+        <img
+          src="images/ww-cnc-carving-019.jpg"
+          alt="Walnut footprint carving"
+          class="lightbox-thumb"
+          loading="lazy"
+          data-caption="A footprint found in a Walnut board."
+        >
+        <figcaption class="caption">
+          A footprint found in a Walnut board.
+        </figcaption>
+      </figure>
+    </section>
+
+    <div class="divider" aria-hidden="true">
+      <div class="divider-line"></div>
+      <div class="divider-line center"></div>
+      <div class="divider-line"></div>
+    </div>
+
+    <!-- 112 -->
+    <section class="gallery" aria-label="Torn board carving">
+      <figure class="image-card">
+        <img
+          src="images/ww-cnc-carving-018.jpg"
+          alt="Torn board carving"
+          class="lightbox-thumb"
+          loading="lazy"
+          data-caption="A board torn open like paper, revealing the inner structure of a tree."
+        >
+        <figcaption class="caption">
+          A board torn open like paper, revealing the inner structure of a tree.
+        </figcaption>
+      </figure>
+    </section>
+
+    <div class="divider" aria-hidden="true">
+      <div class="divider-line"></div>
+      <div class="divider-line center"></div>
+      <div class="divider-line"></div>
+    </div>
+
+    <!-- 103 -->
+    <section class="gallery" aria-label="Watchworks skull carving">
+      <figure class="image-card">
+        <img
+          src="images/ww-cnc-carving-017.jpg"
+          alt="Watchworks skull carving"
+          class="lightbox-thumb"
+          loading="lazy"
+          data-caption="Watchworks behind a human skull in an old barn beam. Apitong wood."
+        >
+        <figcaption class="caption">
+          Watchworks behind a human skull in an old barn beam. Apitong wood.
+        </figcaption>
+      </figure>
+    </section>
+
+    <div class="divider" aria-hidden="true">
+      <div class="divider-line"></div>
+      <div class="divider-line center"></div>
+      <div class="divider-line"></div>
+    </div>
+
+    <!-- 103 (Buddha) -->
+    <section class="gallery" aria-label="Buddha carving">
+      <figure class="image-card">
+        <img
+          src="images/ww-cnc-carving-020.jpg"
+          alt="Buddha carving"
+          class="lightbox-thumb"
+          loading="lazy"
+          data-caption="Two views of the Buddha carving in an old barn beam. Apitong wood."
+        >
+        <figcaption class="caption">
+          Two views of the Buddha carving in an old barn beam. Apitong wood.
+        </figcaption>
+      </figure>
+    </section>
+
+    <!-- Footer (injected) -->
+    <div id="site-footer"></div>
+
+  </div><!-- /.page-container -->
+
+  <a id="back-to-top" href="#" aria-label="Back to top">Top</a>
+
+  <script src="assets/js/includes.js" defer></script>
+  <script src="assets/js/ui.js" defer></script>
+</body>
+</html>
+
