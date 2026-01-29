@@ -170,7 +170,9 @@ header .nav-links a {
 .hero{
   text-align:center;
   margin:var(--space-lg) 0;
+  padding-top: 1.5rem; /* try 1rem if you want it tighter */
 }
+
 .hero-logo{
   width:280px;
   max-width:80%;
