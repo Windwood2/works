@@ -226,9 +226,10 @@ header .nav-links a {
 /* Framed card (Option B: soft, modern, rounded) */
 .image-card{
   background:#222;
-  border:2px solid rgba(153,102,51,0.35); /* soft oak-gold accent */
+  border: 2px solid rgba(153,102,51,0.55);
+  box-shadow: 0 0 0 1px rgba(255,255,255,0.35) inset; /* soft oak-gold accent */
   border-radius:12px;
-  padding:12px;
+  padding:7px;
   color:var(--text-body);
 }
 
