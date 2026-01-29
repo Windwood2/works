@@ -25,6 +25,7 @@
   }
 
   // Load ONLY header and footer (head is no longer injected)
+  await load(base + 'includes/head.html', '#site-head');
   await load(base + 'includes/header.html', '#site-header');
   await load(base + 'includes/footer.html', '#site-footer');
 
