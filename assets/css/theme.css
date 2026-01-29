@@ -22,7 +22,7 @@
   --max-width: 980px;
 }
 
-<link rel="stylesheet" href="assets/css/theme.css?v=2">
+<link rel="stylesheet" href="assets/css/theme.css?v=3">
 
 /* Reset & base */
 *{ box-sizing:border-box }
@@ -232,6 +232,8 @@ header .nav-links a {
 
 /* GALLERY — matches your existing HTML structure */
 
+/* GALLERY — matches your existing HTML structure */
+
 /* Grid container */
 .gallery{
   display:grid;
@@ -249,6 +251,22 @@ header .nav-links a {
   padding:10px;
   color:var(--text-body);
 }
+
+/* Tighten spacing inside each gallery card */
+.image-card img{
+  margin-bottom:0.5rem;   /* reduce space between image and caption */
+}
+
+.image-card p{
+  margin-top:0.25rem;     /* tighten caption spacing */
+  margin-bottom:0.25rem;
+}
+
+/* Tighten spacing around the divider that follows each card */
+.divider{
+  margin:0.5rem 0;        /* adjust this to taste */
+}
+
 
 
 /* Image inside card */
