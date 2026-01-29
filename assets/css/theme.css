@@ -76,15 +76,20 @@ body{
 }
 
 /* Updated nav buttons with subtle border + nowrap */
-.nav-links a{
-  font-family:var(--font-accent);
-  color:var(--oak-gold);
-  text-decoration:none;
-  padding:6px 10px;
-  border-radius:4px;
-  border:1px solid rgba(0,0,0,0.15); /* subtle outline */
-  white-space:nowrap;                /* prevents wrapping */
+.nav-links a {
+  font-family: var(--font-accent);
+  color: var(--oak-gold);
+  text-decoration: none;
+  padding: 6px 10px;
+  border-radius: 4px;
+  white-space: nowrap;
 }
+
+/* Override injected header styles */
+header .nav-links a {
+  border: 1px solid rgba(0,0,0,0.15);
+}
+
 .nav-links a.active{ font-weight:600 }
 .nav-links a:hover{ background:rgba(153,102,51,0.06) }
 
