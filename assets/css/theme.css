@@ -307,6 +307,7 @@ figcaption.caption{
   .hero-logo{ width:200px; }
 }
 main {
-  padding-top: 1.5rem; /* or 1rem if you want a little breathing room */
+  padding-top: 0.5rem !important;
 }
+
 
