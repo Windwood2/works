@@ -218,6 +218,13 @@ header .nav-links a {
   margin:0.35rem 0;
 }
 
+.about-photo img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+}
+
 /* GALLERY — matches your existing HTML structure */
 
 /* Grid container */
