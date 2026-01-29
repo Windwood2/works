@@ -23,6 +23,14 @@
 }
 
 <link rel="stylesheet" href="assets/css/theme.css?v=4">
+v.section-title a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.section-title a:hover {
+  text-decoration: underline;
+}
 
 /* Reset & base */
 *{ box-sizing:border-box }
