@@ -248,7 +248,7 @@ header .nav-links a {
   border: 3px solid rgba(153,102,51,0.75);
   box-shadow: 0 0 0 2px rgba(255,255,255,0.35) inset; /* soft oak-gold accent */
   border-radius:12px;
-  padding:10px;
+  padding:14px;
   color:var(--text-body);
 }
 
