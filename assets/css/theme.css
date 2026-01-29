@@ -175,49 +175,43 @@ body{
   margin:0.35rem 0;
 }
 
-/* GALLERY — Option A (framed card with rounded corners) */
+/* GALLERY — matches your existing HTML structure */
+
+/* Grid container */
 .gallery{
   display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-  gap:18px;
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:22px;
   margin:var(--space-lg) 0;
 }
 
-/* Outer card */
-.gallery-item{
+/* Framed card (Option B: soft, modern, rounded) */
+.image-card{
   background:#222;
   border:2px solid rgba(0,0,0,0.45);
-  border-radius:12px;   /* rounded frame */
-  padding:10px;
+  border-radius:12px;
+  padding:12px;
   color:var(--text-body);
 }
 
 /* Image inside card */
-.gallery-item img{
+.image-card img{
   width:100%;
   height:auto;
-  border-radius:8px;    /* rounded image */
+  border-radius:8px;
   display:block;
-  margin-bottom:8px;
+  margin-bottom:10px;
   cursor:zoom-in;
 }
 
 /* Caption inside card */
-.gallery-item p{
+.image-card .caption,
+figcaption.caption{
   font-family:var(--font-body);
   font-size:1rem;
   color:var(--text-soft);
   margin:0;
   text-align:center;
-}
-
-/* Old framed card (kept for legacy pages if needed) */
-.gallery-card-old{
-  background:#222;
-  border:2px solid rgba(0,0,0,0.45);
-  padding:8px;
-  border-radius:10px;
-  color:#e6e6e6;
 }
 
 /* Footer */
