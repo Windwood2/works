@@ -347,4 +347,32 @@ main {
   padding-top: 0.5rem !important;
 }
 
+.secret-nav {
+  margin-top: 3rem;
+  text-align: center;
+  opacity: 0.6;
+  font-size: 0.9rem;
+}
+
+.secret-nav ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.secret-nav li {
+  display: inline-block;
+  margin: 0 0.75rem;
+}
+
+.secret-nav a {
+  color: var(--text-body);
+  text-decoration: none;
+}
+
+.secret-nav a:hover {
+  text-decoration: underline;
+  opacity: 1;
+}
+
 
