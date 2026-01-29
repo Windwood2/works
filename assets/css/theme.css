@@ -273,6 +273,11 @@ figcaption.caption{
   text-align:center;
 }
 
+header {
+  margin-bottom: 0.5rem; /* or 0 if you want it tight */
+  padding-bottom: 0;
+}
+
 /* Footer */
 .footer{
   text-align:center;
