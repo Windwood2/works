@@ -22,6 +22,8 @@
   --max-width: 980px;
 }
 
+<link rel="stylesheet" href="assets/css/theme.css?v=2">
+
 /* Reset & base */
 *{ box-sizing:border-box }
 html,body{ height:100% }
@@ -56,8 +58,7 @@ body{
 /* Triple-line divider */
 .divider {
   width: 100%;
-  margin-top: 20px;
-  margin-bottom: 20px;
+  margin: 10px auto;
   display: flex;
   flex-direction: column;
   gap: 3px;
