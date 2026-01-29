@@ -229,7 +229,7 @@ header .nav-links a {
   border: 2px solid rgba(153,102,51,0.55);
   box-shadow: 0 0 0 1px rgba(255,255,255,0.35) inset; /* soft oak-gold accent */
   border-radius:12px;
-  padding:7px;
+  padding:10px;
   color:var(--text-body);
 }
 
@@ -238,7 +238,7 @@ header .nav-links a {
 .image-card img{
   width:100%;
   height:auto;
-  border-radius:8px;
+  border-radius:12px;
   display:block;
   margin-bottom:10px;
   cursor:zoom-in;
