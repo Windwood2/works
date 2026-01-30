@@ -1,48 +1,48 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+  <div id="site-head"></div>
+  <script src="assets/js/includes.js" defer></script>
+
+  <!-- Fallback metadata -->
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Philosophy — Windwood Designs</title>
-  <link rel="stylesheet" href="assets/css/theme.css">
 </head>
 
 <body>
-  <!--#include virtual="header.html" -->
+  <div class="page-container">
 
-  <main>
-    <h1 class="section-title">Philosophy</h1>
-    <p class="page-description">Thoughts on craft, process, and meaning.</p>
+    <!-- Header injected by includes.js -->
+    <div id="site-header"></div>
 
-    <section class="gallery" aria-label="Philosophy Gallery">
+    <main>
+      <h1 class="section-title">Philosophy</h1>
+      <p class="page-description">Thoughts on craft, process, and meaning.</p>
 
-      <!-- Thumbnail 1 -->
-      <figure class="gallery-item">
-        <a href="images/philosophy/full-1.jpg" data-lightbox="philosophy" data-title="Philosophy 1">
-          <img src="images/philosophy/thumb-1.jpg" alt="Philosophy 1" loading="lazy" style="border: 1px solid #ccc;">
-        </a>
-        <figcaption>Philosophy 1</figcaption>
-      </figure>
+      <section class="gallery" aria-label="Philosophy Gallery">
 
-      <!-- Thumbnail 2 -->
-      <figure class="gallery-item">
-        <a href="images/philosophy/full-2.jpg" data-lightbox="philosophy" data-title="Philosophy 2">
-          <img src="images/philosophy/thumb-2.jpg" alt="Philosophy 2" loading="lazy" style="border: 1px solid #ccc;">
-        </a>
-        <figcaption>Philosophy 2</figcaption>
-      </figure>
+        <figure class="gallery-item">
+          <img src="images/philosophy/thumb-1.jpg" alt="Philosophy 1" loading="lazy" style="border:1px solid #ccc;">
+          <figcaption>Philosophy 1</figcaption>
+        </figure>
 
-      <!-- Thumbnail 3 -->
-      <figure class="gallery-item">
-        <a href="images/philosophy/full-3.jpg" data-lightbox="philosophy" data-title="Philosophy 3">
-          <img src="images/philosophy/thumb-3.jpg" alt="Philosophy 3" loading="lazy" style="border: 1px solid #ccc;">
-        </a>
-        <figcaption>Philosophy 3</figcaption>
-      </figure>
+        <figure class="gallery-item">
+          <img src="images/philosophy/thumb-2.jpg" alt="Philosophy 2" loading="lazy" style="border:1px solid #ccc;">
+          <figcaption>Philosophy 2</figcaption>
+        </figure>
 
-    </section>
-  </main>
+        <figure class="gallery-item">
+          <img src="images/philosophy/thumb-3.jpg" alt="Philosophy 3" loading="lazy" style="border:1px solid #ccc;">
+          <figcaption>Philosophy 3</figcaption>
+        </figure>
 
-  <!--#include virtual="footer.html" -->
-  <script src="lightbox.js"></script>
+      </section>
+    </main>
+
+    <!-- Footer injected by includes.js -->
+    <div id="site-footer"></div>
+
+  </div>
 </body>
 </html>
