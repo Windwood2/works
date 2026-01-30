@@ -1,13 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+
   <title>Doodles — Windwood Designs</title>
+
   <link rel="stylesheet" href="assets/css/theme.css">
+
+  <div id="site-head"></div>
+  <script src="assets/js/includes.js" defer></script>
 </head>
 
 <body>
-  <!--#include virtual="header.html" -->
+  <!--#include virtual="includes/header.html" -->
 
   <main>
     <h1 class="section-title">Doodles</h1>
@@ -15,26 +21,23 @@
 
     <section class="gallery" aria-label="Doodles Gallery">
 
-      <!-- Thumbnail 1 -->
       <figure class="gallery-item">
         <a href="images/doodles/full-1.jpg" data-lightbox="doodles" data-title="Doodle 1">
-          <img src="images/doodles/thumb-1.jpg" alt="Doodle 1" loading="lazy" style="border: 1px solid #ccc;">
+          <img src="images/doodles/thumb-1.jpg" alt="Doodle 1" loading="lazy" style="border:1px solid #ccc;">
         </a>
         <figcaption>Doodle 1</figcaption>
       </figure>
 
-      <!-- Thumbnail 2 -->
       <figure class="gallery-item">
         <a href="images/doodles/full-2.jpg" data-lightbox="doodles" data-title="Doodle 2">
-          <img src="images/doodles/thumb-2.jpg" alt="Doodle 2" loading="lazy" style="border: 1px solid #ccc;">
+          <img src="images/doodles/thumb-2.jpg" alt="Doodle 2" loading="lazy" style="border:1px solid #ccc;">
         </a>
         <figcaption>Doodle 2</figcaption>
       </figure>
 
-      <!-- Thumbnail 3 -->
       <figure class="gallery-item">
         <a href="images/doodles/full-3.jpg" data-lightbox="doodles" data-title="Doodle 3">
-          <img src="images/doodles/thumb-3.jpg" alt="Doodle 3" loading="lazy" style="border: 1px solid #ccc;">
+          <img src="images/doodles/thumb-3.jpg" alt="Doodle 3" loading="lazy" style="border:1px solid #ccc;">
         </a>
         <figcaption>Doodle 3</figcaption>
       </figure>
@@ -42,7 +45,6 @@
     </section>
   </main>
 
-  <!--#include virtual="footer.html" -->
-  <script src="lightbox.js"></script>
+  <!--#include virtual="includes/footer.html" -->
 </body>
 </html>
