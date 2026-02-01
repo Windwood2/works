@@ -260,6 +260,7 @@ header .nav-links a {
 }
 
 .about-photo img {
+  width:400px;
   max-width: 70%;
   height: auto;
   display: block;
