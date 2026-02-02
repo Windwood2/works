@@ -1,38 +1,29 @@
-// assets/js/includes.js
-// Load header and footer using dynamic base detection
+// Fetch and inject head fragment into the real <head>
+fetch('includes/head.html')
+  .then(r => r.text())
+  .then(html => {
+    // Parse the fragment into a document
+    const parser = new DOMParser();
+    const doc = parser.parseFromString(html, 'text/html');
 
-(async function () {
+    // Move each child of the parsed head into the real head
+    Array.from(doc.head.children).forEach(node => {
+      // Import node to current document and append
+      document.head.appendChild(document.importNode(node, true));
+    });
 
-  // Detect base path from current URL
-  const path = window.location.pathname;
-  const parts = path.split('/').filter(Boolean);
-  let base = '/';
-
-  if (parts.length > 0) {
-    base = '/' + parts[0] + '/';
-  }
-
-  async function load(url, selector) {
-    try {
-      const res = await fetch(url);
-      if (!res.ok) throw new Error('Fetch failed: ' + res.status);
-      const html = await res.text();
-      const container = document.querySelector(selector);
-      if (container) container.innerHTML = html;
-    } catch (e) {
-      console.warn('Include load failed:', url, e);
-    }
-  }
-
-  // Load ONLY header and footer (head is no longer injected)
-  await load(base + 'includes/head.html', '#site-head');
-  await load(base + 'includes/header.html', '#site-header');
-  await load(base + 'includes/footer.html', '#site-footer');
-
-  // Initialize UI after injection
-  setTimeout(() => {
-    if (window.initWindwoodUI) window.initWindwoodUI();
-  }, 60);
-
-})();
-
+    // If includes/head.html contains inline scripts that must execute,
+    // re-create them so they run (browsers don't execute scripts added via innerHTML)
+    Array.from(document.head.querySelectorAll('script')).forEach(oldScript => {
+      if (!oldScript.dataset.injected) {
+        const s = document.createElement('script');
+        if (oldScript.src) s.src = oldScript.src;
+        if (oldScript.type) s.type = oldScript.type;
+        if (oldScript.defer) s.defer = true;
+        if (!oldScript.src) s.textContent = oldScript.textContent;
+        s.dataset.injected = '1';
+        oldScript.parentNode.replaceChild(s, oldScript);
+      }
+    });
+  })
+  .catch(err => console.error('Failed to load head include:', err));
