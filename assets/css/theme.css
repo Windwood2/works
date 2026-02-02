@@ -421,6 +421,8 @@ main {
 
 #cascade-container {
   position: relative;
+  z-index: 5; /* lifts it above the dark background */
+  overflow: visible; /* important */
   width: 100%;
   height: 1600px; /* adjust based on number of images */
   margin: 0 auto;
@@ -428,6 +430,7 @@ main {
 
 .cascade-img {
   position: absolute;
+  z-index: 10; /* ensures images sit above everything */
   width: 260px; /* adjust to taste */
   border-radius: 4px;
   box-shadow: 0 4px 12px rgba(0,0,0,0.25);
