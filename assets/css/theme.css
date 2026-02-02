@@ -439,4 +439,7 @@ main {
   cursor: pointer;
 }
 
+body, .page-container {
+  background: #ffffff !important;
+}
 
