@@ -48,8 +48,35 @@
       }
     });
   } catch (e) {
-    console.warn('Head include load failed:', base + 'includes/head.html', e);
-  }
+// Load head fragment and move its head children into the real <head>
+try {
+  const res = await fetch(base + 'includes/head.html', { cache: 'no-store' });
+  if (!res.ok) throw new Error('Fetch failed: ' + res.status);
+  const html = await res.text();
+  const parser = new DOMParser();
+  const doc = parser.parseFromString(html, 'text/html');
+
+  // Append each child of the parsed head into the real head
+  Array.from(doc.head.children).forEach(node => {
+    document.head.appendChild(document.importNode(node, true));
+  });
+
+  // Recreate scripts so they execute
+  Array.from(document.head.querySelectorAll('script')).forEach(oldScript => {
+    if (!oldScript.dataset.injected) {
+      const s = document.createElement('script');
+      if (oldScript.src) s.src = oldScript.src;
+      if (oldScript.type) s.type = oldScript.type;
+      if (oldScript.defer) s.defer = true;
+      if (!oldScript.src) s.textContent = oldScript.textContent;
+      s.dataset.injected = '1';
+      oldScript.parentNode.replaceChild(s, oldScript);
+    }
+  });
+} catch (e) {
+  console.warn('Head include load failed:', base + 'includes/head.html', e);
+}
+
 
   // Load header and footer into body placeholders
   await loadFragment(base + 'includes/header.html', '#site-header');
