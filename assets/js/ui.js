@@ -163,4 +163,66 @@
     });
   }
 
+  document.addEventListener("DOMContentLoaded", () => {
+
+  const container = document.getElementById("cascade-container");
+  if (!container) return; // Do nothing on pages without the cascade
+
+  // CNC Carvings sample images
+  const images = [
+    "works/images/ww-cnc-carving-016.jpg",
+    "works/images/ww-cnc-carving-017.jpg",
+    "works/images/ww-cnc-carving-018.jpg",
+       "works/images/ww-cnc-carving-019.jpg",
+       "works/images/ww-cnc-carving-020.jpg",
+       "works/images/ww-cnc-carving-021.jpg",
+       "works/images/ww-cnc-carving-022.jpg",
+       "works/images/ww-cnc-carving-023.jpg",
+       "works/images/ww-cnc-carving-024.jpg",
+       "works/images/ww-cnc-carving-025.jpg",
+       "works/images/ww-cnc-carving-026.jpg",
+       "works/images/ww-cnc-carving-027.jpg",
+    
+  ];
+
+  // Shuffle
+  const shuffled = images
+    .map(x => ({ x, r: Math.random() }))
+    .sort((a, b) => a.r - b.r)
+    .map(o => o.x);
+
+  shuffled.forEach((src, i) => {
+    const img = document.createElement("img");
+    img.src = src;
+    img.className = "cascade-img";
+
+    // S-curve horizontal offset
+    const xOffset = Math.sin(i / 2) * 80;
+
+    // Vertical spacing
+    const yOffset = i * 180;
+
+    // Initial position (for animation)
+    img.style.transform = `translate(${xOffset}px, ${yOffset + 40}px)`;
+    img.style.opacity = 0;
+
+    container.appendChild(img);
+
+    // Animate into place
+    setTimeout(() => {
+      img.style.transform = `translate(${xOffset}px, ${yOffset}px)`;
+      img.style.opacity = 1;
+    }, i * 120);
+
+    // Lightbox hook
+    img.addEventListener("click", () => {
+      if (typeof openLightbox === "function") {
+        openLightbox(src);
+      }
+    });
+  });
+
+});
+
+
 })();
