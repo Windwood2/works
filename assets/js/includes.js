@@ -1,19 +1,41 @@
-// Fetch and inject head fragment into the real <head>
-fetch('includes/head.html')
-  .then(r => r.text())
-  .then(html => {
-    // Parse the fragment into a document
+// assets/js/includes.js
+// Load head, header, and footer with dynamic base detection.
+// Head fragment is parsed and its head children are appended into the real <head>.
+
+(async function () {
+  // Detect base path from current URL
+  const path = window.location.pathname;
+  const parts = path.split('/').filter(Boolean);
+  let base = '/';
+  if (parts.length > 0) base = '/' + parts[0] + '/';
+
+  // Generic loader for body fragments (header/footer)
+  async function loadFragment(url, selector) {
+    try {
+      const res = await fetch(url, { cache: 'no-store' });
+      if (!res.ok) throw new Error('Fetch failed: ' + res.status);
+      const html = await res.text();
+      const container = document.querySelector(selector);
+      if (container) container.innerHTML = html;
+    } catch (e) {
+      console.warn('Include load failed:', url, e);
+    }
+  }
+
+  // Load head fragment and move its head children into the real <head>
+  try {
+    const res = await fetch(base + 'includes/head.html', { cache: 'no-store' });
+    if (!res.ok) throw new Error('Fetch failed: ' + res.status);
+    const html = await res.text();
     const parser = new DOMParser();
     const doc = parser.parseFromString(html, 'text/html');
 
-    // Move each child of the parsed head into the real head
+    // Append each child of the parsed head into the real head
     Array.from(doc.head.children).forEach(node => {
-      // Import node to current document and append
       document.head.appendChild(document.importNode(node, true));
     });
 
-    // If includes/head.html contains inline scripts that must execute,
-    // re-create them so they run (browsers don't execute scripts added via innerHTML)
+    // Recreate scripts so they execute (browsers don't run scripts added via innerHTML)
     Array.from(document.head.querySelectorAll('script')).forEach(oldScript => {
       if (!oldScript.dataset.injected) {
         const s = document.createElement('script');
@@ -25,5 +47,20 @@ fetch('includes/head.html')
         oldScript.parentNode.replaceChild(s, oldScript);
       }
     });
-  })
-  .catch(err => console.error('Failed to load head include:', err));
+  } catch (e) {
+    console.warn('Head include load failed:', base + 'includes/head.html', e);
+  }
+
+  // Load header and footer into body placeholders
+  await loadFragment(base + 'includes/header.html', '#site-header');
+  await loadFragment(base + 'includes/footer.html', '#site-footer');
+
+  // Small delay to allow injected content to settle, then initialize UI if present
+  setTimeout(() => {
+    if (window.initWindwoodUI) {
+      try { window.initWindwoodUI(); } catch (e) { console.warn('initWindwoodUI error', e); }
+    }
+  }, 60);
+})();
+
+
