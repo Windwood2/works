@@ -94,7 +94,7 @@ body{
 /* NAVBAR */
 .navbar{
   background:transparent;
-  margin-bottom:var(--space-md);
+  margin-bottom:var(--space-sm);
 }
 
 .navbar-inner{
