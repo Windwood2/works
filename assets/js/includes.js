@@ -3,6 +3,11 @@
 
 (async function () {
 
+ // assets/js/includes.js
+// Dynamically detect the correct base path (e.g., /works/) so includes load correctly
+
+(async function () {
+
   // Detect base path from current URL
   // Example: https://windwood2.github.io/works/boxes.html
   // pathname = "/works/boxes.html" → base = "/works/"
