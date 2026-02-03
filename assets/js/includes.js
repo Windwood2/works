@@ -1,10 +1,5 @@
 // assets/js/includes.js
-// Dynamically detect the correct base path (e.g., /works/) so includes load correctly
-
-(async function () {
-
- // assets/js/includes.js
-// Dynamically detect the correct base path (e.g., /works/) so includes load correctly
+// Automatically detect the correct base path (e.g., /works/) so includes load correctly
 
 (async function () {
 
@@ -16,7 +11,6 @@
   let base = '/';
 
   if (parts.length > 0) {
-    // If first segment is the repo name, use it as base
     base = '/' + parts[0] + '/';
   }
 
