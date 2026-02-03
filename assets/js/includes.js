@@ -4,13 +4,14 @@
 (async function () {
 
   // Detect base path from current URL
-  const path = window.location.pathname;
-  const parts = path.split('/').filter(Boolean);
-  let base = '/';
+ const path = window.location.pathname;
+const parts = path.split('/').filter(Boolean);
 
-  if (parts.length > 0) {
-    base = '/' + parts[0] + '/';
-  }
+// If first segment looks like a file (contains a dot), don't treat it as a folder.
+let base = '/';
+if (parts.length > 0 && !parts[0].includes('.')) {
+  base = '/' + parts[0] + '/';
+}
 
   async function load(url, selector) {
     try {

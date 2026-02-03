@@ -12,6 +12,7 @@
 
   --wine-dark: #330000;
   --oak-gold: #996633;
+  --caption: rgba(255, 215, 170, 0.78);
   --text-body: #e6e6e6;
   --text-soft: #cfcfcf;
   --bg-dark: #0a0a0a;
@@ -42,10 +43,15 @@ body{
 /* Site title (Tangerine only here) */
 .site-title{
   font-family:'Tangerine', cursive;
-  font-size:4.2rem;
+  font-size:3.6rem;
   color:var(--oak-gold);
   text-align:center;
   margin:0 0 6px;
+  text-shadow:
+    0 1px 0 rgba(255,255,255,0.08),   /* faint highlight (top edge) */
+    0 -1px 0 rgba(0,0,0,0.55),        /* faint shadow (bottom edge) */
+    0 6px 14px rgba(0,0,0,0.35);      /* soft depth */
+
 }
 .site-sub{
   text-align:center;
@@ -89,118 +95,135 @@ body{
   );
 }
 
-
-}
-
 /* NAVBAR */
+/* =========================
+   NAV (clean module)
+   One source of truth for button look
+   ========================= */
+
+/* Header container: keep transparent so no “big rectangle” */
 .navbar{
-  
-  background-color: #663300;
-  
-  margin-bottom:var(--space-sm);
+  background: transparent;
+  margin-bottom: var(--space-sm);
 }
 
+/* Center title + nav as a group */
 .navbar-inner{
-  background-color: #663300;
+  position: relative;                 /* for absolute hamburger */
   width: 100%;
-  background-color: inherit;
-  display:flex;
-  align-items:center;
-  gap:1rem;
-  justify-content:center;
-  position:relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;            /* centers title+nav as a group */
+  gap: 16px;
 }
 
+/* Desktop nav list */
 .nav-links{
-  display:flex;
-  gap:14px;
-  list-style:none;
-  padding:0;
-  margin:0;
-}
-
-/* Updated nav buttons with subtle border + nowrap */
-.nav-links a {
-  font-family: var(--font-accent);
-  color: var(--oak-gold);
-  text-decoration: none;
-  padding: 6px 6px;
-  border-radius: 4px;
-  white-space: nowrap;
-}
-
-
-.secret-nav {
-  margin-top: 3rem;
-  padding: 1rem 0;
-  text-align: center;
-   /* same dark background as your header */
-  border-top: 1px solid rgba(153, 102, 51, 0.35); /* soft oak-gold */
-}
-
-.secret-nav ul {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 16px;
   list-style: none;
   padding: 0;
   margin: 0;
 }
 
-.secret-nav li {
+/* Shared “pill” button styling: desktop + secret nav */
+.nav-links a,
+.secret-nav a{
   display: inline-block;
-  margin: 0 1rem;
-}
-
-.secret-nav a {
-  color: rgba(255, 215, 130, 0.9); /* your warm gold nav color */
+  font-family: var(--font-accent);
+  color: var(--oak-gold);
   text-decoration: none;
-  font-family: Laila, sans-serif;
-  font-size: 0.95rem;
+  white-space: nowrap;
+
+  background-color: var(--wine-dark);
+  border: 1px solid rgba(153,102,51,0.35);
+
+  padding: 5px 8px;                  /* edit here once */
+  border-radius: 6px;                /* edit here once */
+
+  transition: background-color 0.15s ease, border-color 0.15s ease;
 }
 
-.secret-nav a:hover {
-  text-decoration: underline;
+.nav-links a:hover,
+.secret-nav a:hover{
+  background-color: #240000;         /* darker wine */
+  border-color: rgba(153,102,51,0.65);
 }
 
-/* Override injected header styles */
-header .nav-links a {
-  border: 1px solid rgba(153,102,51,0.35); /* oak-gold at 35% */
+.nav-links a.active{
+  border-color: rgba(153,102,51,0.85);
+  font-weight: 600;
 }
 
-.nav-links a.active{ font-weight:600 }
-.nav-links a:hover{ background:rgba(153,102,51,0.06) }
+/* Secret nav layout (only appears on pages that include the HTML) */
+.secret-nav{
+  margin-top: 3rem;
+  padding-top: 1rem;
+  text-align: center;
+  border-top: 1px solid rgba(153,102,51,0.35);
+  opacity: 0.7;
+}
 
-/* Hamburger (right) */
+.secret-nav ul{
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.secret-nav li{ margin: 0; }
+
+/* Hamburger: absolute so it doesn’t shove the centered group */
 .hamburger{
-  margin-left:auto;
-  display:none;
-  background:none;
-  border:0;
-  font-size:1.6rem;
-  color:var(--oak-gold);
-  cursor:pointer;
-  padding:6px;
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+
+  display: none;
+  background: none;
+  border: 0;
+  font-size: 1.6rem;
+  color: var(--oak-gold);
+  cursor: pointer;
+  padding: 6px;
 }
 
-/* Floating mobile menu */
+/* Mobile menu */
 .mobile-nav{
-  display:none;
-  position:fixed;
-  top:64px;
-  right:20px;
-  background:var(--wine-dark);
-  padding:14px 18px;
-  border-radius:8px;
-  box-shadow:0 10px 30px rgba(0,0,0,0.6);
-  z-index:1200;
+  display: none;
+  position: fixed;
+  top: 64px;
+  right: 20px;
+
+  background: var(--wine-dark);
+  padding: 14px 18px;
+  border-radius: 10px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+  z-index: 1200;
 }
+
 .mobile-nav.open{
-  display:flex;
-  flex-direction:column;
-  gap:10px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
+
 .mobile-nav a{
-  color:var(--oak-gold);
-  text-decoration:none;
-  padding:6px 0;
+  color: var(--oak-gold);
+  text-decoration: none;
+  padding: 6px 2px;
+}
+
+/* Responsive */
+@media (max-width: 820px){
+  .nav-links{ display: none; }
+  .hamburger{ display: block; }
 }
 
 /* HERO */
@@ -273,7 +296,6 @@ header .nav-links a {
   margin: 0 auto;
 }
 
-/* GALLERY — matches your existing HTML structure */
 
 /* GALLERY — matches your existing HTML structure */
 
@@ -287,18 +309,14 @@ header .nav-links a {
 
 /* Framed card (Option B: soft, modern, rounded) */
 .image-card{
-  background:#222;
-  border: 3px solid rgba(153,102,51,0.75);
+  background:#330000;
+  border: 1px solid rgba(153,102,51,0.75);
   box-shadow: 0 0 0 2px rgba(255,255,255,0.35) inset; /* soft oak-gold accent */
   border-radius:12px;
   padding:14px;
   color:var(--text-body);
 }
 
-/* Tighten spacing inside each gallery card */
-.image-card img{
-  margin-bottom:0.7rem;   /* reduce space between image and caption */
-}
 
 .image-card p{
   margin-top:0.2rem;     /* tighten caption spacing */
@@ -307,27 +325,35 @@ header .nav-links a {
 
 /* Tighten spacing around the divider that follows each card */
 .divider{
-  margin:0.2rem 0;        /* adjust this to taste */
+  margin:0.1rem 0;        /* adjust this to taste */
 }
 
 /* Image inside card */
 .image-card img{
   width:100%;
   height:auto;
-  border-radius:14px;
   display:block;
-  margin-bottom:16px;
+  background-color: var(--wine-dark);           /* the mat color */
+  padding: 6px;                                  /* thickness of the mat */
+  border-radius: 12px;
+  margin-bottom:1.7rem;   /* reduce space between image and caption */
+  border: 1px solid rgba(153,102,51,0.35);       /* subtle edge */
   cursor:zoom-in;
 }
 
 /* Caption inside card */
 .image-card .caption,
 figcaption.caption{
+  color: var(--caption);
   font-family:var(--font-body);
-  font-size:1rem;
-  color:var(--text-soft);
-  margin:0;
-  text-align:center;
+  font-size:1.05rem;
+  letter-spacing: 0.02em;
+  text-align: center;
+  padding-left: 14px;
+  padding-right: 14px;
+  max-width: 54ch;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 /* Footer */
@@ -345,20 +371,31 @@ figcaption.caption{
   right:20px;
   top:50%;
   transform:translateY(-50%);
-  background:var(--oak-gold);
-  color:#000;
-  padding:10px 12px;
-  border-radius:8px;
+
+  background-color: var(--wine-dark);
+  color: var(--oak-gold);
+  border: 1px solid rgba(153,102,51,0.35);
+
+  padding: 6px 10px;
+  border-radius: 6px;
   text-decoration:none;
-  box-shadow:0 6px 18px rgba(0,0,0,0.5);
+
+  box-shadow: 0 6px 18px rgba(0,0,0,0.5);
   opacity:0;
   pointer-events:none;
-  transition:opacity .2s;
+  transition: opacity 0.2s ease, background-color 0.15s ease, border-color 0.15s ease;
 }
+
 #back-to-top.visible{
   opacity:1;
   pointer-events:auto;
 }
+
+#back-to-top:hover{
+  background-color: #240000;
+  border-color: rgba(153,102,51,0.65);
+}
+
 
 v.section-title a {
   color: inherit;
@@ -381,8 +418,6 @@ v.section-title a {
 
 /* Responsive */
 @media (max-width:820px){
-  .nav-links{ display:none; }
-  .hamburger{ display:block; }
   .site-title{ font-size:2.6rem; }
   .hero-logo{ width:200px; }
 }
@@ -437,5 +472,8 @@ main {
   transition: opacity 0.6s ease, transform 0.8s ease;
   cursor: pointer;
 }
+
+
+
 
 
