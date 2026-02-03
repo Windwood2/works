@@ -102,6 +102,9 @@ body{
 }
 
 .navbar-inner{
+  background-color: #663300;
+  width: 100%;
+  background-color: inherit;
   display:flex;
   align-items:center;
   gap:1rem;
@@ -122,7 +125,7 @@ body{
   font-family: var(--font-accent);
   color: var(--oak-gold);
   text-decoration: none;
-  padding: 6px 10px;
+  padding: 6px 6px;
   border-radius: 4px;
   white-space: nowrap;
 }
