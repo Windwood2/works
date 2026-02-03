@@ -53,6 +53,27 @@ body{
   font-size:1rem;
 }
 
+/* Triple-line divider */
+.divider {
+  width: 100%;
+  margin: 40px auto;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  align-items: center;
+}
+
+.divider-line {
+  width: 100%;
+  height: 1px;
+  background: rgba(255,255,255,0.18); /* soft light line */
+}
+
+.divider-line.center {
+  width: 60%;
+  background: rgba(255,255,255,0.28); /* slightly brighter center line */
+}
+
 /* NAVBAR */
 .navbar{
   background:transparent;
@@ -87,7 +108,7 @@ body{
 
 /* Override injected header styles */
 header .nav-links a {
-  border: 1px solid rgba(0,0,0,0.15);
+  border: 1px solid rgba(153,102,51,0.35); /* oak-gold at 35% */
 }
 
 .nav-links a.active{ font-weight:600 }
