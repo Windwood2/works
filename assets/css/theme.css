@@ -1,14 +1,14 @@
 /* assets/css/theme.css
    Windwood minimal theme (root paths assumed)
-   Fonts: Tangerine (titles), Lora (body), Laila (captions)
+   Fonts: Tangerine (site header), Laila (titles), Lora (body & captions)
 */
 
 /* Font imports are provided in includes/head.html */
 
 :root{
-  --font-title: 'Tangerine', cursive;
-  --font-body: 'Lora', serif;
-  --font-accent: 'Laila', serif;
+  --font-title: 'Laila', serif;      /* page & section titles */
+  --font-body: 'Lora', serif;        /* body text & captions */
+  --font-accent: 'Laila', serif;     /* nav */
 
   --wine-dark: #330000;
   --oak-gold: #996633;
@@ -23,8 +23,8 @@
 }
 
 /* Reset & base */
-*{box-sizing:border-box}
-html,body{height:100%}
+*{ box-sizing:border-box }
+html,body{ height:100% }
 body{
   margin:0;
   font-family:var(--font-body);
@@ -38,9 +38,9 @@ body{
   padding:28px;
 }
 
-/* Site title */
+/* Site title (Tangerine only here) */
 .site-title{
-  font-family:var(--font-title);
+  font-family:'Tangerine', cursive;
   font-size:3.2rem;
   color:var(--oak-gold);
   text-align:center;
@@ -58,12 +58,7 @@ body{
   background:transparent;
   margin-bottom:var(--space-md);
 }
-header nav a {
-    padding: 6px 10px;
-    border: 1px solid rgba(0,0,0,0.15);
-    border-radius: 4px;
-    white-space: nowrap;
-}
+
 .navbar-inner{
   display:flex;
   align-items:center;
@@ -71,6 +66,7 @@ header nav a {
   justify-content:center;
   position:relative;
 }
+
 .nav-links{
   display:flex;
   gap:14px;
@@ -78,15 +74,19 @@ header nav a {
   padding:0;
   margin:0;
 }
+
+/* Updated nav buttons with subtle border + nowrap */
 .nav-links a{
   font-family:var(--font-accent);
   color:var(--oak-gold);
   text-decoration:none;
-  padding:6px 8px;
+  padding:6px 10px;
   border-radius:4px;
+  border:1px solid rgba(0,0,0,0.15); /* subtle outline */
+  white-space:nowrap;                /* prevents wrapping */
 }
-.nav-links a.active{font-weight:600}
-.nav-links a:hover{background:rgba(153,102,51,0.06)}
+.nav-links a.active{ font-weight:600 }
+.nav-links a:hover{ background:rgba(153,102,51,0.06) }
 
 /* Hamburger (right) */
 .hamburger{
@@ -112,32 +112,122 @@ header nav a {
   box-shadow:0 10px 30px rgba(0,0,0,0.6);
   z-index:1200;
 }
-.mobile-nav.open{display:flex;flex-direction:column;gap:10px}
-.mobile-nav a{color:var(--oak-gold);text-decoration:none;padding:6px 0}
+.mobile-nav.open{
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+}
+.mobile-nav a{
+  color:var(--oak-gold);
+  text-decoration:none;
+  padding:6px 0;
+}
 
 /* HERO */
-.hero{ text-align:center; margin:var(--space-lg) 0; }
-.hero-logo{ width:280px; max-width:80%; height:auto; display:block; margin:0 auto 12px; }
-.hero-tagline{ color:var(--text-soft); margin:0 0 var(--space-md); }
+.hero{
+  text-align:center;
+  margin:var(--space-lg) 0;
+}
+.hero-logo{
+  width:280px;
+  max-width:80%;
+  height:auto;
+  display:block;
+  margin:0 auto 12px;
+}
+.hero-tagline{
+  color:var(--text-soft);
+  margin:0 0 var(--space-md);
+}
 
-/* Page titles & sections */
-.page-title{ font-family:var(--font-title); font-size:2.4rem; color:var(--oak-gold); text-align:center; margin:0 0 var(--space-md); }
-.section-title{ font-family:var(--font-title); font-size:1.6rem; color:var(--oak-gold); margin:var(--space-md) 0 0.5rem; }
-.page-description{ max-width:60ch; margin:0 auto var(--space-lg); color:var(--text-soft); line-height:1.6; text-align:center; }
+/* Page titles & sections (now Laila) */
+.page-title{
+  font-family:var(--font-title);
+  font-size:2.4rem;
+  font-weight:600;
+  color:var(--oak-gold);
+  text-align:center;
+  margin:0 0 var(--space-md);
+}
+.section-title{
+  font-family:var(--font-title);
+  font-size:1.6rem;
+  font-weight:600;
+  color:var(--oak-gold);
+  margin:var(--space-md) 0 0.5rem;
+}
+.page-description{
+  max-width:60ch;
+  margin:0 auto var(--space-lg);
+  color:var(--text-soft);
+  line-height:1.6;
+  text-align:center;
+}
 
 /* Lists */
-.homepage-list{ padding-left:20px; max-width:60ch; margin:0 auto; color:var(--text-body); }
-.homepage-list li{ margin:0.35rem 0; }
+.homepage-list{
+  padding-left:20px;
+  max-width:60ch;
+  margin:0 auto;
+  color:var(--text-body);
+}
+.homepage-list li{
+  margin:0.35rem 0;
+}
 
-/* Gallery grid */
-.gallery{ display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:18px; margin:var(--space-lg) 0; }
-.gallery img{ width:100%; height:auto; border-radius:6px; box-shadow:0 6px 18px rgba(0,0,0,0.6); cursor:zoom-in; }
+/* GALLERY — Option A (framed card with rounded corners) */
+.gallery{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:18px;
+  margin:var(--space-lg) 0;
+}
 
-/* Old framed card */
-.gallery-card-old{ background:#222; border:2px solid rgba(0,0,0,0.45); padding:8px; border-radius:10px; color:#e6e6e6; }
+/* Outer card */
+.gallery-item{
+  background:#222;
+  border:2px solid rgba(0,0,0,0.45);
+  border-radius:12px;   /* rounded frame */
+  padding:10px;
+  color:var(--text-body);
+}
+
+/* Image inside card */
+.gallery-item img{
+  width:100%;
+  height:auto;
+  border-radius:8px;    /* rounded image */
+  display:block;
+  margin-bottom:8px;
+  cursor:zoom-in;
+}
+
+/* Caption inside card */
+.gallery-item p{
+  font-family:var(--font-body);
+  font-size:1rem;
+  color:var(--text-soft);
+  margin:0;
+  text-align:center;
+}
+
+/* Old framed card (kept for legacy pages if needed) */
+.gallery-card-old{
+  background:#222;
+  border:2px solid rgba(0,0,0,0.45);
+  padding:8px;
+  border-radius:10px;
+  color:#e6e6e6;
+}
 
 /* Footer */
-.footer{ text-align:center; color:var(--text-soft); margin:var(--space-lg) 0 0; padding-top:12px; font-size:0.95rem; }
+.footer{
+  text-align:center;
+  color:var(--text-soft);
+  margin:var(--space-lg) 0 0;
+  padding-top:12px;
+  font-size:0.95rem;
+}
 
 /* Back to top (middle-right) */
 #back-to-top{
@@ -155,7 +245,10 @@ header nav a {
   pointer-events:none;
   transition:opacity .2s;
 }
-#back-to-top.visible{ opacity:1; pointer-events:auto; }
+#back-to-top.visible{
+  opacity:1;
+  pointer-events:auto;
+}
 
 /* Responsive */
 @media (max-width:820px){
@@ -164,3 +257,4 @@ header nav a {
   .site-title{ font-size:2.6rem; }
   .hero-logo{ width:200px; }
 }
+
