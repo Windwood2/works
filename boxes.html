@@ -1,18 +1,26 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <!-- head will be injected by /assets/js/includes.js from /includes/head.html -->
+  <!-- head will be injected by /assets/js/includes.js -->
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Boxes — Windwood Designs</title>
 </head>
+
 <body>
   <div class="page-container">
 
     <!-- Header (injected) -->
     <div id="site-header"></div>
 
-    <main>
+    <!-- PAGE CONTENT GOES HERE -->
+    <main class="gallery-page">
+      <h1 class="page-title">Boxes</h1>
+      <p class="page-description">A collection of handcrafted boxes.</p>
+
+      <!-- Add your gallery items here -->
+    </main>
+
       <section class="page-intro" aria-labelledby="boxes-title">
         <h1 id="boxes-title" class="page-title">Boxes and Such</h1>
 
@@ -149,14 +157,12 @@
     </main>
 
     <!-- Footer (injected) -->
-    <div id="site-footer"></div>
+       <div id="site-footer"></div>
   </div><!-- /.page-container -->
 
-  <!-- Back to top -->
   <a id="back-to-top" href="#" aria-label="Back to top">Top</a>
 
-  <!-- Includes loader and UI scripts -->
-  <script src="works/assets/js/includes.js" defer></script>
-  <script src="works/assets/js/ui.js" defer></script>
+  <script src="assets/js/includes.js" defer></script>
+  <script src="assets/js/ui.js" defer></script>
 </body>
 </html>
