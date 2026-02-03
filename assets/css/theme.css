@@ -97,7 +97,7 @@ body{
 .navbar{
   
   background-color: #663300;
-  # background:transparent;
+  
   margin-bottom:var(--space-sm);
 }
 
