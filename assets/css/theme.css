@@ -174,12 +174,12 @@ header .nav-links a {
 }
 
 .hero-logo{
-  width:280px;
+  width:320px;
   max-width:80%;
   height:auto;
   display:block;
   margin:0 auto 12px;
-  margin-bottom: 2.5rem; /* adjust to taste */
+  margin-bottom: 3rem; /* adjust to taste */
 }
 .hero-tagline{
   color:var(--text-soft);
