@@ -177,6 +177,7 @@ header .nav-links a {
   height:auto;
   display:block;
   margin:0 auto 12px;
+  margin-bottom: 1.5rem; /* adjust to taste */
 }
 .hero-tagline{
   color:var(--text-soft);
