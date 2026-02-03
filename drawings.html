@@ -1,48 +1,48 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+  <div id="site-head"></div>
+  <script src="assets/js/includes.js" defer></script>
+
+  <!-- Fallback metadata -->
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Drawings — Windwood Designs</title>
-  <link rel="stylesheet" href="assets/css/theme.css">
 </head>
 
 <body>
-  <!--#include virtual="header.html" -->
+  <div class="page-container">
 
-  <main>
-    <h1 class="section-title">Drawings</h1>
-    <p class="page-description">Lines, forms, and ideas on paper.</p>
+    <!-- Header injected by includes.js -->
+    <div id="site-header"></div>
 
-    <section class="gallery" aria-label="Drawings Gallery">
+    <main>
+      <h1 class="section-title">Drawings</h1>
+      <p class="page-description">Lines, forms, and ideas on paper.</p>
 
-      <!-- Thumbnail 1 -->
-      <figure class="gallery-item">
-        <a href="images/drawings/full-1.jpg" data-lightbox="drawings" data-title="Drawing 1">
-          <img src="images/drawings/thumb-1.jpg" alt="Drawing 1" loading="lazy" style="border: 1px solid #ccc;">
-        </a>
-        <figcaption>Drawing 1</figcaption>
-      </figure>
+      <section class="gallery" aria-label="Drawings Gallery">
 
-      <!-- Thumbnail 2 -->
-      <figure class="gallery-item">
-        <a href="images/drawings/full-2.jpg" data-lightbox="drawings" data-title="Drawing 2">
-          <img src="images/drawings/thumb-2.jpg" alt="Drawing 2" loading="lazy" style="border: 1px solid #ccc;">
-        </a>
-        <figcaption>Drawing 2</figcaption>
-      </figure>
+        <figure class="gallery-item">
+          <img src="images/drawings/thumb-1.jpg" alt="Drawing 1" loading="lazy" style="border:1px solid #ccc;">
+          <figcaption>Drawing 1</figcaption>
+        </figure>
 
-      <!-- Thumbnail 3 -->
-      <figure class="gallery-item">
-        <a href="images/drawings/full-3.jpg" data-lightbox="drawings" data-title="Drawing 3">
-          <img src="images/drawings/thumb-3.jpg" alt="Drawing 3" loading="lazy" style="border: 1px solid #ccc;">
-        </a>
-        <figcaption>Drawing 3</figcaption>
-      </figure>
+        <figure class="gallery-item">
+          <img src="images/drawings/thumb-2.jpg" alt="Drawing 2" loading="lazy" style="border:1px solid #ccc;">
+          <figcaption>Drawing 2</figcaption>
+        </figure>
 
-    </section>
-  </main>
+        <figure class="gallery-item">
+          <img src="images/drawings/thumb-3.jpg" alt="Drawing 3" loading="lazy" style="border:1px solid #ccc;">
+          <figcaption>Drawing 3</figcaption>
+        </figure>
 
-  <!--#include virtual="footer.html" -->
-  <script src="lightbox.js"></script>
+      </section>
+    </main>
+
+    <!-- Footer injected by includes.js -->
+    <div id="site-footer"></div>
+
+  </div>
 </body>
 </html>
