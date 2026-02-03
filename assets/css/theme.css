@@ -1,0 +1,160 @@
+/* assets/css/theme.css
+   Windwood minimal theme (root paths assumed)
+   Fonts: Tangerine (titles), Lora (body), Laila (captions)
+*/
+
+/* Font imports are provided in includes/head.html */
+
+:root{
+  --font-title: 'Tangerine', cursive;
+  --font-body: 'Lora', serif;
+  --font-accent: 'Laila', serif;
+
+  --wine-dark: #330000;
+  --oak-gold: #996633;
+  --text-body: #e6e6e6;
+  --text-soft: #cfcfcf;
+  --bg-dark: #0a0a0a;
+
+  --space-sm: 1rem;
+  --space-md: 1.5rem;
+  --space-lg: 3rem;
+  --max-width: 980px;
+}
+
+/* Reset & base */
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;
+  font-family:var(--font-body);
+  background:radial-gradient(circle at center,#000 0%,var(--bg-dark) 40%,#000 100%);
+  color:var(--text-body);
+  -webkit-font-smoothing:antialiased;
+}
+.page-container{
+  max-width:var(--max-width);
+  margin:0 auto;
+  padding:28px;
+}
+
+/* Site title */
+.site-title{
+  font-family:var(--font-title);
+  font-size:3.2rem;
+  color:var(--oak-gold);
+  text-align:center;
+  margin:0 0 6px;
+}
+.site-sub{
+  text-align:center;
+  color:var(--text-soft);
+  margin:0 0 var(--space-lg);
+  font-size:1rem;
+}
+
+/* NAVBAR */
+.navbar{
+  background:transparent;
+  margin-bottom:var(--space-md);
+}
+.navbar-inner{
+  display:flex;
+  align-items:center;
+  gap:1rem;
+  justify-content:center;
+  position:relative;
+}
+.nav-links{
+  display:flex;
+  gap:14px;
+  list-style:none;
+  padding:0;
+  margin:0;
+}
+.nav-links a{
+  font-family:var(--font-accent);
+  color:var(--oak-gold);
+  text-decoration:none;
+  padding:6px 8px;
+  border-radius:4px;
+}
+.nav-links a.active{font-weight:600}
+.nav-links a:hover{background:rgba(153,102,51,0.06)}
+
+/* Hamburger (right) */
+.hamburger{
+  margin-left:auto;
+  display:none;
+  background:none;
+  border:0;
+  font-size:1.6rem;
+  color:var(--oak-gold);
+  cursor:pointer;
+  padding:6px;
+}
+
+/* Floating mobile menu */
+.mobile-nav{
+  display:none;
+  position:fixed;
+  top:64px;
+  right:20px;
+  background:var(--wine-dark);
+  padding:14px 18px;
+  border-radius:8px;
+  box-shadow:0 10px 30px rgba(0,0,0,0.6);
+  z-index:1200;
+}
+.mobile-nav.open{display:flex;flex-direction:column;gap:10px}
+.mobile-nav a{color:var(--oak-gold);text-decoration:none;padding:6px 0}
+
+/* HERO */
+.hero{ text-align:center; margin:var(--space-lg) 0; }
+.hero-logo{ width:280px; max-width:80%; height:auto; display:block; margin:0 auto 12px; }
+.hero-tagline{ color:var(--text-soft); margin:0 0 var(--space-md); }
+
+/* Page titles & sections */
+.page-title{ font-family:var(--font-title); font-size:2.4rem; color:var(--oak-gold); text-align:center; margin:0 0 var(--space-md); }
+.section-title{ font-family:var(--font-title); font-size:1.6rem; color:var(--oak-gold); margin:var(--space-md) 0 0.5rem; }
+.page-description{ max-width:60ch; margin:0 auto var(--space-lg); color:var(--text-soft); line-height:1.6; text-align:center; }
+
+/* Lists */
+.homepage-list{ padding-left:20px; max-width:60ch; margin:0 auto; color:var(--text-body); }
+.homepage-list li{ margin:0.35rem 0; }
+
+/* Gallery grid */
+.gallery{ display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:18px; margin:var(--space-lg) 0; }
+.gallery img{ width:100%; height:auto; border-radius:6px; box-shadow:0 6px 18px rgba(0,0,0,0.6); cursor:zoom-in; }
+
+/* Old framed card */
+.gallery-card-old{ background:#222; border:2px solid rgba(0,0,0,0.45); padding:8px; border-radius:10px; color:#e6e6e6; }
+
+/* Footer */
+.footer{ text-align:center; color:var(--text-soft); margin:var(--space-lg) 0 0; padding-top:12px; font-size:0.95rem; }
+
+/* Back to top (middle-right) */
+#back-to-top{
+  position:fixed;
+  right:20px;
+  top:50%;
+  transform:translateY(-50%);
+  background:var(--oak-gold);
+  color:#000;
+  padding:10px 12px;
+  border-radius:8px;
+  text-decoration:none;
+  box-shadow:0 6px 18px rgba(0,0,0,0.5);
+  opacity:0;
+  pointer-events:none;
+  transition:opacity .2s;
+}
+#back-to-top.visible{ opacity:1; pointer-events:auto; }
+
+/* Responsive */
+@media (max-width:820px){
+  .nav-links{ display:none; }
+  .hamburger{ display:block; }
+  .site-title{ font-size:2.6rem; }
+  .hero-logo{ width:200px; }
+}
