@@ -95,7 +95,9 @@ body{
 
 /* NAVBAR */
 .navbar{
-  background:transparent;
+  
+  background-color: #663300;
+  # background:transparent;
   margin-bottom:var(--space-sm);
 }
 
@@ -123,6 +125,37 @@ body{
   padding: 6px 10px;
   border-radius: 4px;
   white-space: nowrap;
+}
+
+
+.secret-nav {
+  margin-top: 3rem;
+  padding: 1rem 0;
+  text-align: center;
+   /* same dark background as your header */
+  border-top: 1px solid rgba(153, 102, 51, 0.35); /* soft oak-gold */
+}
+
+.secret-nav ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.secret-nav li {
+  display: inline-block;
+  margin: 0 1rem;
+}
+
+.secret-nav a {
+  color: rgba(255, 215, 130, 0.9); /* your warm gold nav color */
+  text-decoration: none;
+  font-family: Laila, sans-serif;
+  font-size: 0.95rem;
+}
+
+.secret-nav a:hover {
+  text-decoration: underline;
 }
 
 /* Override injected header styles */
