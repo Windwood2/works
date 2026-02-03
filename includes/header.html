@@ -1,24 +1,39 @@
 <!-- includes/header.html -->
 <header class="navbar" role="banner">
   <div class="navbar-inner">
+
+    <!-- Site Title -->
     <h1 class="site-title">Windwood Designs</h1>
 
-    <ul class="nav-links" role="navigation" aria-label="Main">
-      <li><a href="index.html">Home</a></li>
-      <li><a href="about.html">About</a></li>
-      <li><a href="cnc-carvings.html">CNC Carvings</a></li>
-      <li><a href="wall-art.html">Wall Art</a></li>
-      <li><a href="mirrors.html">Mirrors</a></li>
-      <li><a href="furniture.html">Furniture</a></li>
-      <li><a href="mantels.html">Mantels</a></li>
-      <li><a href="boxes.html">Boxes</a></li>
-      <li><a href="contact.html">Contact</a></li>
-    </ul>
+    <!-- Desktop Navigation -->
+    <nav class="desktop-nav" aria-label="Main navigation">
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="cnc-carvings.html">CNC Carvings</a></li>
+        <li><a href="wall-art.html">Wall Art</a></li>
+        <li><a href="mirrors.html">Mirrors</a></li>
+        <li><a href="furniture.html">Furniture</a></li>
+        <li><a href="mantels.html">Mantels</a></li>
+        <li><a href="boxes.html">Boxes</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
 
-    <button class="hamburger" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-nav">☰</button>
+    <!-- Mobile Hamburger -->
+    <button class="hamburger"
+            aria-label="Open menu"
+            aria-expanded="false"
+            aria-controls="mobile-nav">
+      ☰
+    </button>
   </div>
 
-  <nav id="mobile-nav" class="mobile-nav" aria-hidden="true">
+  <!-- Mobile Navigation -->
+  <nav id="mobile-nav"
+       class="mobile-nav"
+       aria-label="Mobile navigation"
+       aria-hidden="true">
     <a href="index.html">Home</a>
     <a href="about.html">About</a>
     <a href="cnc-carvings.html">CNC Carvings</a>
