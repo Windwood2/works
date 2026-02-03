@@ -43,7 +43,7 @@ body{
 /* Site title (Tangerine only here) */
 .site-title{
   font-family:'Tangerine', cursive;
-  font-size:3.2rem;
+  font-size:4.2rem;
   color:var(--oak-gold);
   text-align:center;
   margin:0 0 6px;
