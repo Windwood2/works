@@ -170,7 +170,7 @@ header .nav-links a {
 .hero{
   text-align:center;
   margin:var(--space-lg) 0;
-  padding-top: 1.5rem; /* try 1rem if you want it tighter */
+  padding-top: 0.5rem; /* try 1rem if you want it tighter */
 }
 
 .hero-logo{
@@ -208,6 +208,10 @@ header .nav-links a {
   color:var(--text-soft);
   line-height:1.6;
   text-align:center;
+}
+
+main {
+  padding-top: 1.5rem; /* or 1rem if you want a little breathing room */
 }
 
 /* Lists */
