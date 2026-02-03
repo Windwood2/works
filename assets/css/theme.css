@@ -210,10 +210,6 @@ header .nav-links a {
   text-align:center;
 }
 
-main {
-  padding-top: 1.5rem; /* or 1rem if you want a little breathing room */
-}
-
 /* Lists */
 .homepage-list{
   padding-left:20px;
@@ -273,12 +269,6 @@ figcaption.caption{
   text-align:center;
 }
 
-#site-header {
-  margin-bottom: 0.5rem; /* or 0 if you want it tight */
-  padding-bottom: 0;
-}
-
-
 /* Footer */
 .footer{
   text-align:center;
@@ -315,5 +305,8 @@ figcaption.caption{
   .hamburger{ display:block; }
   .site-title{ font-size:2.6rem; }
   .hero-logo{ width:200px; }
+}
+main {
+  padding-top: 1.5rem; /* or 1rem if you want a little breathing room */
 }
 
