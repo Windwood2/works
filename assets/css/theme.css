@@ -22,7 +22,7 @@
   --max-width: 980px;
 }
 
-<link rel="stylesheet" href="assets/css/theme.css?v=3">
+<link rel="stylesheet" href="assets/css/theme.css?v=4">
 
 /* Reset & base */
 *{ box-sizing:border-box }
@@ -245,8 +245,8 @@ header .nav-links a {
 /* Framed card (Option B: soft, modern, rounded) */
 .image-card{
   background:#222;
-  border: 2px solid rgba(153,102,51,0.55);
-  box-shadow: 0 0 0 1px rgba(255,255,255,0.35) inset; /* soft oak-gold accent */
+  border: 3px solid rgba(153,102,51,0.75);
+  box-shadow: 0 0 0 2px rgba(255,255,255,0.35) inset; /* soft oak-gold accent */
   border-radius:12px;
   padding:10px;
   color:var(--text-body);
@@ -254,28 +254,26 @@ header .nav-links a {
 
 /* Tighten spacing inside each gallery card */
 .image-card img{
-  margin-bottom:0.5rem;   /* reduce space between image and caption */
+  margin-bottom:0.7rem;   /* reduce space between image and caption */
 }
 
 .image-card p{
-  margin-top:0.25rem;     /* tighten caption spacing */
-  margin-bottom:0.25rem;
+  margin-top:0.2rem;     /* tighten caption spacing */
+  margin-bottom:0.2rem;
 }
 
 /* Tighten spacing around the divider that follows each card */
 .divider{
-  margin:0.5rem 0;        /* adjust this to taste */
+  margin:0.2rem 0;        /* adjust this to taste */
 }
-
-
 
 /* Image inside card */
 .image-card img{
   width:100%;
   height:auto;
-  border-radius:12px;
+  border-radius:14px;
   display:block;
-  margin-bottom:10px;
+  margin-bottom:16px;
   cursor:zoom-in;
 }
 
