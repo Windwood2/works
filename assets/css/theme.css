@@ -21,6 +21,42 @@
   --space-md: 1.5rem;
   --space-lg: 3rem;
   --max-width: 980px;
+ 
+}
+ /* =========================
+   THEMES (override colors only)
+   ========================= */
+
+html.theme-daylight{
+  --wine-dark: #5b1a1f;
+  --oak-gold:  #c79a5a;
+  --text-body: #f3efe8;
+  --text-soft: #d9d2c7;
+  --bg-dark:   #1b1b1a;
+}
+
+html.theme-slate{
+  --wine-dark: #4b1416;
+  --oak-gold:  #c2a06a;
+  --text-body: #e9edf1;
+  --text-soft: #c7cfd8;
+  --bg-dark:   #121820;
+}
+html.theme-warm{
+  --wine-dark: #5a161a;           /* brighter wine */
+  --oak-gold:  #c79a5a;           /* friendlier oak */
+  --text-body: #f2e9dd;           /* parchment */
+  --text-soft: #d8c9b6;           /* warm gray */
+  --bg-dark:   #1b1713;           /* lifted charcoal */
+
+  --caption: rgba(255, 225, 195, 0.78); /* optional: warmer captions */
+}
+html.theme-hotpink{
+  --wine-dark: hotpink;
+  --oak-gold:  lime;
+  --text-body: white;
+  --text-soft: #ddd;
+  --bg-dark:   #141210;
 }
 
 
@@ -30,10 +66,11 @@ html,body{ height:100% }
 body{
   margin:0;
   font-family:var(--font-body);
-  background:radial-gradient(circle at center,#000 0%,var(--bg-dark) 40%,#000 100%);
+  background: radial-gradient(circle at center, #1a1714 0%, var(--bg-dark) 55%, #0f0e0d 100%);
   color:var(--text-body);
   -webkit-font-smoothing:antialiased;
 }
+
 .page-container{
   max-width:var(--max-width);
   margin:0 auto;
