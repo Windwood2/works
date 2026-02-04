@@ -1,104 +1,422 @@
-/* assets/css/theme.css
-   Windwood minimal theme (root paths assumed)
-   Fonts: Tangerine (site header), Laila (titles), Lora (body & captions)
-*/
+/* =========================================================
+   Windwood theme.css
+   Goal: predictable edits + theme changes that affect EVERYTHING
+   Structure:
+     1) Constants (fonts/spacing)
+     2) Palette (raw colors; themes override these)
+     3) Tokens (job-based variables used by components)
+     4) Components (navbar, hero, gallery, etc.)
+   ========================================================= */
 
-/* Font imports are provided in includes/head.html */
 
+/* =========================
+   1) CONSTANTS (do not theme)
+   Affects: typography + spacing + layout width
+   ========================= */
 :root{
-  --font-title: 'Laila', serif;      /* page & section titles */
-  --font-body: 'Lora', serif;        /* body text & captions */
-  --font-accent: 'Laila', serif;     /* nav */
+/* =========================
+   TWEAK ZONE (safe knobs)
+   ========================= */
+--t-title-size: 3.6rem;     /* Windwood Designs size */
+--t-pill-radius: 6px;       /* nav/top button rounding */
+--t-pill-pad-y: 5px;        /* nav/top button height */
+--t-pill-pad-x: 8px;        /* nav/top button width */
+--t-mat-pad: 6px;           /* image mat thickness */
+--t-card-radius: 12px;      /* card rounding */
+--t-caption-size: 1.05rem;  /* caption size */
 
-  --wine-dark: #330000;
-  --oak-gold: #996633;
-  --caption: rgba(255, 215, 170, 0.78);
-  --text-body: #e6e6e6;
-  --text-soft: #cfcfcf;
-  --bg-dark: #0a0a0a;
+  /* =========================
+     TWEAK ZONE (safe knobs)
+     Change these first before hunting through the file.
+     ========================= */
+
+  /* Typography */
+  --t-title-size: 3.6rem;       /* Windwood Designs title size */
+  --t-title-margin-bottom: 6px; /* space under title */
+
+  /* Nav / button pills */
+  --t-pill-pad-y: 5px;          /* button height */
+  --t-pill-pad-x: 8px;          /* button width */
+  --t-pill-radius: 6px;         /* corner roundness */
+  --t-pill-gap: 16px;           /* spacing between nav buttons */
+  --t-pill-border: 1px;         /* border thickness */
+
+  /* Gallery cards */
+  --t-card-radius: 12px;
+  --t-card-padding: 34px;
+
+  /* Image “mat” */
+  --t-mat-pad: 6px;             /* thickness of mat behind image */
+  --t-img-radius: 12px;         /* rounding on the image frame */
+
+  /* Captions */
+  --t-caption-size: 1.05rem;
+  --t-caption-pad-x: 14px;      /* left/right padding */
+  --t-caption-max: 54ch;        /* line length */
+
+  /* Back-to-top button */
+  --t-top-pad-y: 6px;
+  --t-top-pad-x: 10px;
+
+/*end tweak zone*/
+
+
+--font-title: 'Lora', serif;         /* page/section titles */
+--font-body:  'Lora', serif;           /* body + captions */
+--font-accent:'Laila', serif;            /* nav/buttons */
+
 
   --space-sm: 1rem;
   --space-md: 1.5rem;
   --space-lg: 3rem;
   --max-width: 980px;
- 
+
+  /* =========================
+     2) PALETTE (raw colors)
+     Themes override ONLY these
+     ========================= */
+
+  /* Backgrounds */
+  --c-bg-0: #0a0a0a;   /* page background base */
+  --c-bg-1: #1b1a18;   /* panel/card background */
+
+  /* Text */
+  --c-ink-0: #e6e6e6;  /* primary text */
+  --c-ink-1: #cfcfcf;  /* muted text */
+
+  /* Accents */
+  --c-accent-0: #330000; /* wine (fills) */
+  --c-accent-1: #996633; /* oak  (text/lines) */
+
+  /* Lines */
+  --c-line-0: rgba(153,102,51,0.35); /* subtle border */
+  --c-line-1: rgba(153,102,51,0.75); /* strong border */
+
+  /* =========================
+     3) TOKENS (jobs used by components)
+     Change components by editing these, not hex values
+     ========================= */
+
+  /* Page + panels */
+  --bg-page:   var(--c-bg-0);
+  --bg-panel:  var(--c-bg-1);
+
+  /* Text */
+  --text-primary: var(--c-ink-0);
+  --text-muted:   var(--c-ink-1);
+
+  /* Accent usage */
+  --accent-fill:  var(--c-accent-0);
+  --accent-ink:   var(--c-accent-1);
+
+  /* Borders / dividers */
+  --border-soft:   var(--c-line-0);
+  --border-strong: var(--c-line-1);
+
+  /* “Mats” + captions (gallery) */
+  --mat-bg:        var(--accent-fill); /* behind images */
+  --caption-color: rgba(255, 215, 170, 0.78); /* default caption tone */
+
+  /* Nav/top button styling */
+  --pill-bg:       var(--accent-fill);
+  --pill-text:     var(--accent-ink);
+  --pill-border:   var(--border-soft);
+  --pill-hover-bg: #240000;            /* default hover */
+  --pill-hover-border: rgba(153,102,51,0.65);
+
+  /* Divider lines */
+  --divider-faint: rgba(255,255,255,0.4);
+  --divider-accent: rgba(153,102,51,0.85);
 }
- /* =========================
-   THEMES (override colors only)
+
+
+/* =========================
+   4) THEMES (override PALETTE only)
+   IMPORTANT: keep these overrides limited to --c-* and a few tokens
    ========================= */
 
-html.theme-daylight{
-  --wine-dark: #5b1a1f;
-  --oak-gold:  #c79a5a;
-  --text-body: #f3efe8;
-  --text-soft: #d9d2c7;
-  --bg-dark:   #1b1b1a;
+/* Default (optional; leaving it here is fine) */
+html.theme-default{
+  --c-bg-0: #0a0a0a;
+  --c-bg-1: #1b1a18;
+  --c-ink-0: #e6e6e6;
+  --c-ink-1: #cfcfcf;
+  --c-accent-0: #330000;
+  --c-accent-1: #996633;
+  --c-line-0: rgba(153,102,51,0.35);
+  --c-line-1: rgba(153,102,51,0.75);
+
+  --caption-color: rgba(255, 215, 170, 0.78);
 }
 
-html.theme-slate{
-  --wine-dark: #4b1416;
-  --oak-gold:  #c2a06a;
-  --text-body: #e9edf1;
-  --text-soft: #c7cfd8;
-  --bg-dark:   #121820;
-}
+/* Warm */
 html.theme-warm{
-  --wine-dark: #5a161a;           /* brighter wine */
-  --oak-gold:  #c79a5a;           /* friendlier oak */
-  --text-body: #f2e9dd;           /* parchment */
-  --text-soft: #d8c9b6;           /* warm gray */
-  --bg-dark:   #1b1713;           /* lifted charcoal */
+  --c-bg-0: #1b1713;
+  --c-bg-1: #221d18;
+  --c-ink-0: #f2e9dd;
+  --c-ink-1: #d8c9b6;
+  --c-accent-0: #5a161a;
+  --c-accent-1: #c79a5a;
+  --c-line-0: rgba(199,154,90,0.35);
+  --c-line-1: rgba(199,154,90,0.75);
 
-  --caption: rgba(255, 225, 195, 0.78); /* optional: warmer captions */
-}
-html.theme-hotpink{
-  --wine-dark: hotpink;
-  --oak-gold:  lime;
-  --text-body: white;
-  --text-soft: #ddd;
-  --bg-dark:   #141210;
+  --pill-hover-bg: #3f1013;
+  --caption-color: rgba(255, 225, 195, 0.78);
 }
 
+/* Daylight */
+html.theme-daylight{
+  --c-bg-0: #1b1b1a;
+  --c-bg-1: #232322;
+  --c-ink-0: #f3efe8;
+  --c-ink-1: #d9d2c7;
+  --c-accent-0: #5b1a1f;
+  --c-accent-1: #c79a5a;
+  --c-line-0: rgba(199,154,90,0.35);
+  --c-line-1: rgba(199,154,90,0.75);
 
-/* Reset & base */
+  --pill-hover-bg: #441217;
+  --caption-color: rgba(243, 239, 232, 0.78);
+}
+
+/* Slate */
+html.theme-slate{
+  --c-bg-0: #121820;
+  --c-bg-1: #18202a;
+  --c-ink-0: #e9edf1;
+  --c-ink-1: #c7cfd8;
+  --c-accent-0: #4b1416;
+  --c-accent-1: #c2a06a;
+  --c-line-0: rgba(194,160,106,0.35);
+  --c-line-1: rgba(194,160,106,0.75);
+
+  --pill-hover-bg: #361012;
+  --caption-color: rgba(233, 237, 241, 0.72);
+}
+
+/* Forest */
+html.theme-forest{
+  --c-bg-0: #333d29;    /* deep olive */
+  --c-bg-1: #2b3324;    /* panel */
+  --c-ink-0: #e7e5d5;   /* readable light */
+  --c-ink-1: #c2c5aa;   /* muted */
+  --c-accent-0: #3a2a18; /* “walnut” button fill (not bright green) */
+  --c-accent-1: #a4ac86; /* sage/lichen ink */
+  --c-line-0: rgba(164,172,134,0.35);
+  --c-line-1: rgba(164,172,134,0.75);
+
+  --pill-hover-bg: #2c2014;
+  --caption-color: rgba(231, 229, 213, 0.74);
+}
+
+/* Debug beacon */
+html.theme-debug{
+  --c-bg-0: #141210;
+  --c-bg-1: #1b1a18;
+  --c-ink-0: #ffffff;
+  --c-ink-1: #dddddd;
+  --c-accent-0: hotpink;
+  --c-accent-1: lime;
+  --c-line-0: rgba(0,255,0,0.5);
+  --c-line-1: rgba(0,255,0,0.85);
+
+  --pill-hover-bg: #ff66cc;
+  --caption-color: rgba(255,255,255,0.9);
+}
+
+
+/* =========================================================
+   5) RESET + BASE
+   Affects: whole site
+   ========================================================= */
 *{ box-sizing:border-box }
 html,body{ height:100% }
+
 body{
   margin:0;
-  font-family:var(--font-body);
-  background: radial-gradient(circle at center, #1a1714 0%, var(--bg-dark) 55%, #0f0e0d 100%);
-  color:var(--text-body);
-  -webkit-font-smoothing:antialiased;
+  font-family: var(--font-body);
+  color: var(--text-primary);
+  line-height: 1.55;
+  background: radial-gradient(
+  circle at center,
+  #0c0b0a 0%,
+  var(--bg-page) 40%,
+  #0c0b0a 100%
+);
+
+
+  background-repeat: no-repeat;  /* stops tiling/repeating */
+  background-size: cover;        /* fills viewport */
+  background-attachment: fixed;  /* prevents “scroll bands” */
+
+  -webkit-font-smoothing: antialiased;
 }
 
 .page-container{
-  max-width:var(--max-width);
-  margin:0 auto;
-  padding:28px;
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 28px;
 }
 
-/* Site title (Tangerine only here) */
+
+/* =========================================================
+   6) HEADER / NAV
+   Affects: top title + nav buttons + hamburger + mobile menu
+   ========================================================= */
+
+/* Header wrapper (keep transparent so no big bar) */
+.navbar{
+  background: transparent;
+  margin-bottom: var(--space-sm);
+}
+
+/* Centers title + nav as a group */
+.navbar-inner{
+  position: relative;     /* allows hamburger to float right */
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+}
+
+/* Site title */
 .site-title{
   font-family:'Tangerine', cursive;
-  font-size:3.6rem;
-  color:var(--oak-gold);
-  text-align:center;
-  margin:0 0 6px;
-  text-shadow:
-    0 1px 0 rgba(255,255,255,0.08),   /* faint highlight (top edge) */
-    0 -1px 0 rgba(0,0,0,0.55),        /* faint shadow (bottom edge) */
-    0 6px 14px rgba(0,0,0,0.35);      /* soft depth */
+  font-size: var(--t-title-size);
+  margin: 0 0 var(--t-title-margin-bottom);
+  color: var(--accent-ink);
+  text-align: center;
 
+  /* subtle emboss depth */
+  text-shadow:
+    0 1px 0 rgba(255,255,255,0.08),
+    0 -1px 0 rgba(0,0,0,0.55),
+    0 6px 14px rgba(0,0,0,0.35);
 }
+
+/* Optional subtitle text */
 .site-sub{
   text-align:center;
-  color:var(--text-soft);
-  margin:0 0 var(--space-lg);
-  font-size:1rem;
+  color: var(--text-muted);
+  margin: 0 0 var(--space-lg);
+  font-size: 1rem;
 }
 
-/* Triple-line divider */
-.divider {
+/* Desktop nav list */
+.nav-links{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--t-pill-gap);
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+/* Pill buttons (shared: main nav + secret nav + top button style) */
+.nav-links a,
+.secret-nav a,
+#back-to-top{
+  display: inline-block;
+  font-family: var(--font-accent);
+  color: var(--pill-text);
+  text-decoration: none;
+  white-space: nowrap;
+  
+  padding: var(--t-pill-pad-y) var(--t-pill-pad-x);
+  border-radius: var(--t-pill-radius);
+  border-width: var(--t-pill-border);
+  border-style: solid;
+  background-color: var(--pill-bg);
+  transition: background-color 0.15s ease, border-color 0.15s ease;
+}
+
+/* Hover affects only the hovered button */
+.nav-links a:hover,
+.secret-nav a:hover,
+#back-to-top:hover{
+  background-color: var(--pill-hover-bg);
+  border-color: var(--pill-hover-border);
+}
+
+.nav-links a.active{
+  border-color: var(--border-strong);
+  font-weight: 600;
+}
+
+/* Hamburger (mobile) */
+.hamburger{
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+
+  display: none;
+  background: none;
+  border: 0;
+  font-size: 1.6rem;
+  color: var(--accent-ink);
+  cursor: pointer;
+  padding: 6px;
+}
+
+/* Mobile flyout menu */
+.mobile-nav{
+  display: none;
+  position: fixed;
+  top: 64px;
+  right: 20px;
+
+  background: var(--pill-bg);
+  padding: 14px 18px;
+  border-radius: 10px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+  z-index: 1200;
+}
+.mobile-nav.open{
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.mobile-nav a{
+  color: var(--pill-text);
+  text-decoration: none;
+  padding: 6px 2px;
+}
+
+/* Responsive */
+@media (max-width: 820px){
+  .nav-links{ display:none; }
+  .hamburger{ display:block; }
+  .site-title{ font-size:2.6rem; }
+}
+
+
+/* =========================================================
+   7) HERO + DIVIDERS
+   Affects: logo + hero spacing + decorative dividers
+   ========================================================= */
+.hero{
+  text-align: center;
+  margin: var(--space-lg) 0;
+}
+
+.hero-logo{
+  width: 450px;
+  max-width: 80%;
+  height: auto;
+  display: block;
+  margin: 0 auto 3rem;
+}
+
+.hero-tagline{
+  color: var(--text-muted);
+  margin: 0 0 var(--space-md);
+}
+
+/* Divider used in HERO or between sections */
+.divider{
   width: 100%;
   margin: 10px auto;
   display: flex;
@@ -107,100 +425,152 @@ body{
   align-items: center;
 }
 
-/* Outer lines — 80% width, soft fade */
-.divider-line {
+/* Divider used inside GALLERY cards gets different spacing */
+.image-card .divider{
+  margin: 0.1rem 0;
+}
+
+.divider-line{
   width: 80%;
   height: 1px;
   background: linear-gradient(
     to right,
     rgba(255,255,255,0) 0%,
-    rgba(255,255,255,0.4) 50%,
+    var(--divider-faint) 50%,
     rgba(255,255,255,0) 100%
   );
 }
 
-/* Center line — full width, gold accent, improved fade */
-.divider-line.center {
+.divider-line.center{
   width: 100%;
   height: 2px;
   background: linear-gradient(
     to right,
     rgba(153,102,51,0) 0%,
-    rgba(153,102,51,0.85) 40%,
-    rgba(153,102,51,0.85) 60%,
+    var(--divider-accent) 40%,
+    var(--divider-accent) 60%,
     rgba(153,102,51,0) 100%
   );
 }
 
-/* NAVBAR */
-/* =========================
-   NAV (clean module)
-   One source of truth for button look
-   ========================= */
 
-/* Header container: keep transparent so no “big rectangle” */
-.navbar{
-  background: transparent;
-  margin-bottom: var(--space-sm);
-}
-
-/* Center title + nav as a group */
-.navbar-inner{
-  position: relative;                 /* for absolute hamburger */
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;            /* centers title+nav as a group */
-  gap: 16px;
-}
-
-/* Desktop nav list */
-.nav-links{
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 16px;
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-/* Shared “pill” button styling: desktop + secret nav */
-.nav-links a,
-.secret-nav a{
-  display: inline-block;
-  font-family: var(--font-accent);
-  color: var(--oak-gold);
-  text-decoration: none;
-  white-space: nowrap;
-
-  background-color: var(--wine-dark);
-  border: 1px solid rgba(153,102,51,0.35);
-
-  padding: 5px 8px;                  /* edit here once */
-  border-radius: 6px;                /* edit here once */
-
-  transition: background-color 0.15s ease, border-color 0.15s ease;
-}
-
-.nav-links a:hover,
-.secret-nav a:hover{
-  background-color: #240000;         /* darker wine */
-  border-color: rgba(153,102,51,0.65);
-}
-
-.nav-links a.active{
-  border-color: rgba(153,102,51,0.85);
+/* =========================================================
+   8) TITLES + TEXT BLOCKS
+   Affects: page titles, section headings, intro copy
+   ========================================================= */
+.page-title{
+  font-family: var(--font-title);
+  font-size: 2.4rem;
   font-weight: 600;
+  letter-spacing: 0.01em;
+  line-height: 1.15;
+  color: var(--accent-ink);
+  text-align: center;
+  margin: 0 0 var(--space-md);
 }
 
-/* Secret nav layout (only appears on pages that include the HTML) */
+.section-title{
+  font-family: var(--font-title);
+  font-size: 1.6rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  line-height: 1.15;
+  color: var(--accent-ink);
+  margin: var(--space-md) 0 0.5rem;
+}
+
+.page-description{
+  max-width: 60ch;
+  margin: 0 auto var(--space-lg);
+  color: var(--text-muted);
+  line-height: 1.6;
+  text-align: center;
+}
+
+/* Lists on homepage */
+.homepage-list{
+  padding-left: 20px;
+  max-width: 60ch;
+  margin: 0 auto;
+  color: var(--text-primary);
+}
+.homepage-list li{ margin: 0.35rem 0; }
+
+.about-photo img,
+.contact-photo img{
+  display:block;
+  height:auto;
+  margin:0 auto;
+  max-width: 100%;
+}
+.contact-photo img{ width: 350px; max-width: 80%; }
+
+
+/* =========================================================
+   9) GALLERY
+   Affects: gallery grid, image cards, image mat, captions
+   ========================================================= */
+.gallery{
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 22px;
+  margin: var(--space-lg) 0;
+}
+
+.image-card{
+  background: var(--bg-panel);           /* card background */
+  border: 1px solid var(--border-strong);
+  box-shadow: 0 0 0 2px rgba(255,255,255,0.20) inset;
+  border-radius: var(--t-card-radius);
+  padding: var(--t-card-padding);
+  color: var(--text-primary);
+}
+
+.image-card img{
+  width: 100%;
+  height: auto;
+  display: block;
+
+  background-color: var(--mat-bg);       /* “mat” color behind image */
+  padding: var(--t-mat-pad);
+  border-radius: var(--t-img-radius);
+  margin-bottom: 1.7rem;
+  border: 1px solid var(--border-soft);
+  cursor: zoom-in;
+}
+
+/* Captions */
+.image-card .caption,
+figcaption.caption{
+  color: var(--caption-color);           /* caption color token */
+  font-family: var(--font-body);
+  letter-spacing: 0.02em;
+  text-align: center;
+  font-size: var(--t-caption-size);
+  padding-left: var(--t-caption-pad-x);
+  padding-right: var(--t-caption-pad-x);
+  max-width: var(--t-caption-max);
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.image-card p{
+  margin-top: 0.2rem;
+  margin-bottom: 0.2rem;
+}
+
+
+/* =========================================================
+   10) SECRET NAV (only where you include the HTML)
+   Affects: footer-ish hidden gallery links
+   ========================================================= */
 .secret-nav{
   margin-top: 3rem;
   padding-top: 1rem;
   text-align: center;
-  border-top: 1px solid rgba(153,102,51,0.35);
+  border-top: 1px solid var(--border-soft);
   opacity: 0.7;
+  font-size: 0.9rem;
 }
 
 .secret-nav ul{
@@ -215,294 +585,71 @@ body{
 
 .secret-nav li{ margin: 0; }
 
-/* Hamburger: absolute so it doesn’t shove the centered group */
-.hamburger{
-  position: absolute;
-  right: 0;
+
+/* =========================================================
+   11) FOOTER
+   ========================================================= */
+.footer{
+  text-align: center;
+  color: var(--text-muted);
+  margin: var(--space-lg) 0 0;
+  padding-top: 12px;
+  font-size: 0.95rem;
+}
+
+
+/* =========================================================
+   12) BACK TO TOP BUTTON
+   Affects: floating “Top” button (uses pill token style)
+   ========================================================= */
+#back-to-top{
+  position: fixed;
+  right: 20px;
   top: 50%;
   transform: translateY(-50%);
+  padding: var(--t-top-pad-y) var(--t-top-pad-x);
+  border-radius: var(--t-pill-radius);
 
-  display: none;
-  background: none;
-  border: 0;
-  font-size: 1.6rem;
-  color: var(--oak-gold);
-  cursor: pointer;
-  padding: 6px;
-}
-
-/* Mobile menu */
-.mobile-nav{
-  display: none;
-  position: fixed;
-  top: 64px;
-  right: 20px;
-
-  background: var(--wine-dark);
-  padding: 14px 18px;
-  border-radius: 10px;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.6);
-  z-index: 1200;
-}
-
-.mobile-nav.open{
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-.mobile-nav a{
-  color: var(--oak-gold);
-  text-decoration: none;
-  padding: 6px 2px;
-}
-
-/* Responsive */
-@media (max-width: 820px){
-  .nav-links{ display: none; }
-  .hamburger{ display: block; }
-}
-
-/* HERO */
-.hero{
-  text-align:center;
-  margin:var(--space-lg) 0;
-  
-}
-
-.hero-logo{
-  width:450px;
-  max-width:80%;
-  height:auto;
-  display:block;
-  margin:0 auto 12px;
-  margin-bottom: 3rem; /* adjust to taste */
-}
-.hero-tagline{
-  color:var(--text-soft);
-  margin:0 0 var(--space-md);
-}
-
-/* Page titles & sections (now Laila) */
-.page-title{
-  font-family:var(--font-title);
-  font-size:2.4rem;
-  font-weight:600;
-  color:var(--oak-gold);
-  text-align:center;
-  margin:0 0 var(--space-md);
-}
-.section-title{
-  font-family:var(--font-title);
-  font-size:1.6rem;
-  font-weight:600;
-  color:var(--oak-gold);
-  margin:var(--space-md) 0 0.5rem;
-}
-.page-description{
-  max-width:60ch;
-  margin:0 auto var(--space-lg);
-  color:var(--text-soft);
-  line-height:1.6;
-  text-align:center;
-}
-
-/* Lists */
-.homepage-list{
-  padding-left:20px;
-  max-width:60ch;
-  margin:0 auto;
-  color:var(--text-body);
-}
-.homepage-list li{
-  margin:0.35rem 0;
-}
-
-.about-photo img {
-  max-width: 100%;
-  height: auto;
-  display: block;
-  margin: 0 auto;
-}
-
-.contact-photo img {
-  width:350px;
-  max-width: 80%;
-  height: auto;
-  display: block;
-  margin: 0 auto;
-}
-
-
-/* GALLERY — matches your existing HTML structure */
-
-/* Grid container */
-.gallery{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-  gap:22px;
-  margin:var(--space-lg) 0;
-}
-
-/* Framed card (Option B: soft, modern, rounded) */
-.image-card{
-  background:#330000;
-  border: 1px solid rgba(153,102,51,0.75);
-  box-shadow: 0 0 0 2px rgba(255,255,255,0.35) inset; /* soft oak-gold accent */
-  border-radius:12px;
-  padding:14px;
-  color:var(--text-body);
-}
-
-
-.image-card p{
-  margin-top:0.2rem;     /* tighten caption spacing */
-  margin-bottom:0.2rem;
-}
-
-/* Tighten spacing around the divider that follows each card */
-.divider{
-  margin:0.1rem 0;        /* adjust this to taste */
-}
-
-/* Image inside card */
-.image-card img{
-  width:100%;
-  height:auto;
-  display:block;
-  background-color: var(--wine-dark);           /* the mat color */
-  padding: 6px;                                  /* thickness of the mat */
-  border-radius: 12px;
-  margin-bottom:1.7rem;   /* reduce space between image and caption */
-  border: 1px solid rgba(153,102,51,0.35);       /* subtle edge */
-  cursor:zoom-in;
-}
-
-/* Caption inside card */
-.image-card .caption,
-figcaption.caption{
-  color: var(--caption);
-  font-family:var(--font-body);
-  font-size:1.05rem;
-  letter-spacing: 0.02em;
-  text-align: center;
-  padding-left: 14px;
-  padding-right: 14px;
-  max-width: 54ch;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-/* Footer */
-.footer{
-  text-align:center;
-  color:var(--text-soft);
-  margin:var(--space-lg) 0 0;
-  padding-top:12px;
-  font-size:0.95rem;
-}
-
-/* Back to top (middle-right) */
-#back-to-top{
-  position:fixed;
-  right:20px;
-  top:50%;
-  transform:translateY(-50%);
-
-  background-color: var(--wine-dark);
-  color: var(--oak-gold);
-  border: 1px solid rgba(153,102,51,0.35);
-
-  padding: 6px 10px;
-  border-radius: 6px;
-  text-decoration:none;
-
+  opacity: 0;
+  pointer-events: none;
   box-shadow: 0 6px 18px rgba(0,0,0,0.5);
-  opacity:0;
-  pointer-events:none;
   transition: opacity 0.2s ease, background-color 0.15s ease, border-color 0.15s ease;
 }
-
 #back-to-top.visible{
-  opacity:1;
-  pointer-events:auto;
-}
-
-#back-to-top:hover{
-  background-color: #240000;
-  border-color: rgba(153,102,51,0.65);
-}
-
-
-v.section-title a {
-  color: inherit;
-  text-decoration: none;
-}
-
-.section-title a:hover {
-  text-decoration: underline;
-}
-
-.section-title a,
-.section-title a:visited {
-  color: inherit;
-  text-decoration: none;
-}
-
-.section-title a:hover {
-  text-decoration: underline;
-}
-
-/* Responsive */
-@media (max-width:820px){
-  .site-title{ font-size:2.6rem; }
-  .hero-logo{ width:200px; }
-}
-main {
-  padding-top: 0.5rem !important;
-}
-
-.secret-nav {
-  margin-top: 3rem;
-  text-align: center;
-  opacity: 0.6;
-  font-size: 0.9rem;
-}
-
-.secret-nav ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-.secret-nav li {
-  display: inline-block;
-  margin: 0 0.75rem;
-}
-
-.secret-nav a {
-  color: var(--text-body);
-  text-decoration: none;
-}
-
-.secret-nav a:hover {
-  text-decoration: underline;
   opacity: 1;
+  pointer-events: auto;
 }
 
-#cascade-container {
+
+
+/* =========================================================
+   13) MISC / LINKS
+   ========================================================= */
+.section-title a,
+.section-title a:visited{
+  color: inherit;
+  text-decoration: none;
+}
+.section-title a:hover{
+  text-decoration: underline;
+}
+
+
+/* =========================================================
+   14) CASCADE (your special layout)
+   ========================================================= */
+#cascade-container{
   position: relative;
-  z-index: 5; /* lifts it above the dark background */
-  overflow: visible; /* important */
+  z-index: 5;
+  overflow: visible;
   width: 100%;
-  height: 1600px; /* adjust based on number of images */
+  height: 1600px;
   margin: 0 auto;
 }
-
-.cascade-img {
+.cascade-img{
   position: absolute;
-  z-index: 10; /* ensures images sit above everything */
-  width: 260px; /* adjust to taste */
+  z-index: 10;
+  width: 260px;
   border-radius: 4px;
   box-shadow: 0 4px 12px rgba(0,0,0,0.25);
   opacity: 0;
@@ -510,7 +657,5 @@ main {
   cursor: pointer;
 }
 
-
-
-
-
+/* Small spacing tweak (kept from your original) */
+main{ padding-top: 0.5rem !important; }

@@ -6,10 +6,12 @@
   // =========================
   // Theme switch (change ONE word)
   // =========================
-  const THEME = 'theme-warm'; // theme-warm | theme-daylight | theme-slate
+  const THEME = 'theme-forest';
 
-  document.documentElement.classList.remove('theme-warm', 'theme-daylight', 'theme-slate');
-  document.documentElement.classList.add('theme-warm');
+
+  document.documentElement.classList.remove('theme-warm','theme-daylight','theme-slate','theme-forest','theme-debug','theme-default');
+  document.documentElement.classList.add(THEME);
+
 
   // =========================
   // Detect base path from current URL
