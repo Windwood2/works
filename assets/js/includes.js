@@ -62,20 +62,17 @@
     }
   }
 
-  // Load head, header, footer
-  await loadHead(base + 'includes/head.html');
-  await loadFragment(base + 'includes/header.html', '#site-header');
-  await loadFragment(base + 'includes/footer.html', '#site-footer');
+// Load head, header, footer
+await loadHead(base + 'includes/head.html');
+await loadFragment(base + 'includes/header.html', '#site-header');
+await loadFragment(base + 'includes/footer.html', '#site-footer');
 
-  // Initialize UI after injection
-setTimeout(() => {
-  if (window.initWindwoodUI) window.initWindwoodUI();
-  if (window.initWindwoodCascade) window.initWindwoodCascade();
-}, 60);
+// Initialize AFTER injection (no timing guess, no duplicates)
+if (window.initWindwoodUI) {
+  try { window.initWindwoodUI(); } catch (e) { console.warn('initWindwoodUI error', e); }
+}
+if (window.initWindwoodCascade) {
+  try { window.initWindwoodCascade(); } catch (e) { console.warn('initWindwoodCascade error', e); }
+}
 
-  setTimeout(() => {
-    if (window.initWindwoodUI) {
-      try { window.initWindwoodUI(); } catch (e) { console.warn('initWindwoodUI error', e); }
-    }
-  }, 60);
 })();
