@@ -242,8 +242,8 @@ return {
       });
     });
   }
-
-  // Public init
+  
+    // Public init
   window.initWindwoodCascade = function () {
     document.querySelectorAll("[data-cascade]").forEach(initCascade);
   };

@@ -169,19 +169,22 @@
   if (!container) return; // Do nothing on pages without the cascade
 
   // CNC Carvings sample images
-  const images = [
-    "works/images/ww-cnc-carving-016.jpg",
-    "works/images/ww-cnc-carving-017.jpg",
-    "works/images/ww-cnc-carving-018.jpg",
-       "works/images/ww-cnc-carving-019.jpg",
-       "works/images/ww-cnc-carving-020.jpg",
-       "works/images/ww-cnc-carving-021.jpg",
-       "works/images/ww-cnc-carving-022.jpg",
-       "works/images/ww-cnc-carving-023.jpg",
-       "works/images/ww-cnc-carving-024.jpg",
-       "works/images/ww-cnc-carving-025.jpg",
-       "works/images/ww-cnc-carving-026.jpg",
-       "works/images/ww-cnc-carving-027.jpg",
+ 
+   const images = [
+  "images/ww-cnc-carving-016.jpg",
+  "images/ww-cnc-carving-017.jpg",
+  "images/ww-cnc-carving-018.jpg",
+  "images/ww-cnc-carving-019.jpg",
+  "images/ww-cnc-carving-020.jpg",
+  "images/ww-cnc-carving-021.jpg",
+  "images/ww-cnc-carving-022.jpg",
+  "images/ww-cnc-carving-023.jpg",
+  "images/ww-cnc-carving-024.jpg",
+  "images/ww-cnc-carving-025.jpg",
+  "images/ww-cnc-carving-026.jpg",
+  "images/ww-cnc-carving-027.jpg"
+];
+
     
   ];
 
@@ -225,4 +228,4 @@
 });
 
 
-})();
+
