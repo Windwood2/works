@@ -68,6 +68,11 @@
   await loadFragment(base + 'includes/footer.html', '#site-footer');
 
   // Initialize UI after injection
+setTimeout(() => {
+  if (window.initWindwoodUI) window.initWindwoodUI();
+  if (window.initWindwoodCascade) window.initWindwoodCascade();
+}, 60);
+
   setTimeout(() => {
     if (window.initWindwoodUI) {
       try { window.initWindwoodUI(); } catch (e) { console.warn('initWindwoodUI error', e); }
