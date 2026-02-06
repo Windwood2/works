@@ -498,7 +498,7 @@ body{
 	justify-content: flex-start;   /* title sits left */
     padding-right: 52px;           /* reserve space for burger */
     display: grid;
-    grid-template-columns: 1fr auto;  /* title | hamburger */
+    grid-template-columns: 1fr;  /* title | hamburger */
     align-items: center;
     gap: 10px;
   }
@@ -522,6 +522,23 @@ body{
     justify-self: end;     /* pushes it to the far right */
     margin: 0;
   }
+  
+ 
+  .gallery{
+    max-width: 100%;
+    margin-left: -12px;
+    margin-right: -12px;
+	grid-template-columns: 1fr;
+  }
+
+.image-card{
+    padding: 8px;
+  }
+
+  .image-card img{
+    padding: 4px;
+  }
+  
 }
 
 
@@ -925,3 +942,34 @@ figcaption.caption{
 
 /* Small spacing tweak (kept from your original) */
 main{ padding-top: 0.5rem !important; }
+
+@media (max-width: 820px){
+
+  /* Let content breathe edge-to-edge */
+  .page-container{
+	max-width: 100%;
+    padding-left: 0px;
+    padding-right: 0px;
+  }
+
+  /* Reduce card padding on mobile */
+  .image-card{
+    padding: 8px;
+	
+  }
+
+  /* Let images actually fill the card */
+  .image-card img{
+    padding: 0px;        /* thinner “mat” */
+    margin-bottom: .5rem;
+  }
+  
+}
+
+@media (max-width: 820px){
+  .gallery{
+    grid-template-columns: 1fr;
+	margin: 0;
+  }
+}
+
