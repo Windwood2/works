@@ -28,23 +28,66 @@
   // =========================
   // Load head.html into the REAL <head>
   // =========================
-  async function loadHead(url) {
-    try {
-      const res = await fetch(url, { cache: 'no-store' });
-      if (!res.ok) throw new Error('Fetch failed: ' + res.status);
+ async function loadHead(url) {
+  try {
+    const res = await fetch(url, { cache: 'no-store' });
+    if (!res.ok) throw new Error('Fetch failed: ' + res.status);
 
-      const html = await res.text();
-      const parser = new DOMParser();
-      const doc = parser.parseFromString(html, 'text/html');
+    const html = await res.text();
+    const parser = new DOMParser();
+    const doc = parser.parseFromString(html, 'text/html');
 
-      // Append each child of the parsed head into the real head
-      Array.from(doc.head.children).forEach(node => {
-        document.head.appendChild(document.importNode(node, true));
-      });
-    } catch (e) {
-      console.warn('Head include load failed:', url, e);
+    // head.html is a fragment, so nodes may land in body
+    const nodes = (doc.head && doc.head.children && doc.head.children.length)
+      ? Array.from(doc.head.children)
+      : Array.from(doc.body.children);
+
+    // Remove previously injected head nodes (prevents duplicates on navigation)
+    document.querySelectorAll('[data-ww-head="1"]').forEach(n => n.remove());
+
+    // First append non-scripts (links, meta, title, etc.)
+    const scriptNodes = [];
+    for (const node of nodes) {
+      if (node.tagName === 'SCRIPT') {
+        scriptNodes.push(node);
+      } else {
+        const clone = document.importNode(node, true);
+        clone.setAttribute('data-ww-head', '1');
+        document.head.appendChild(clone);
+      }
     }
+
+    // Then append scripts as *new* script elements (guarantees execution)
+    for (const node of scriptNodes) {
+      const s = document.createElement('script');
+      s.setAttribute('data-ww-head', '1');
+
+      // copy attributes
+      for (const attr of node.attributes) s.setAttribute(attr.name, attr.value);
+
+      if (node.src) {
+        s.src = node.getAttribute('src');
+      } else {
+        s.textContent = node.textContent;
+      }
+
+      // IMPORTANT: dynamically added scripts should NOT use defer
+      s.defer = false;
+
+      // Wait for external scripts to load before continuing
+      await new Promise((resolve, reject) => {
+        s.onload = resolve;
+        s.onerror = reject;
+        document.head.appendChild(s);
+      });
+    }
+
+  } catch (e) {
+    console.warn('Head include load failed:', url, e);
   }
+}
+
+
 
   // =========================
   // Load body fragments (header/footer)
@@ -67,12 +110,8 @@ await loadHead(base + 'includes/head.html');
 await loadFragment(base + 'includes/header.html', '#site-header');
 await loadFragment(base + 'includes/footer.html', '#site-footer');
 
-// Initialize AFTER injection (no timing guess, no duplicates)
-if (window.initWindwoodUI) {
-  try { window.initWindwoodUI(); } catch (e) { console.warn('initWindwoodUI error', e); }
-}
-if (window.initWindwoodCascade) {
-  try { window.initWindwoodCascade(); } catch (e) { console.warn('initWindwoodCascade error', e); }
-}
+// Initialize AFTER injection
+if (window.initWindwoodUI) window.initWindwoodUI();
+if (window.initWindwoodCascade) window.initWindwoodCascade();
 
 })();

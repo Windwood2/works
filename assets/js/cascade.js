@@ -22,77 +22,58 @@
     return (x2 - x1) * (y2 - y1);
   }
 
-function edgePeekOK(rect, placed, peekPx) {
-  // If nothing placed yet, it's fine
-  if (!placed.length) return true;
+  function edgePeekOK(rect, placed, peekPx) {
+    if (!placed.length) return true;
 
-  // We’ll sample 4 thin “edge strips” on the new image and see if ANY strip
-  // is not heavily covered.
-  const strips = [
-    { x: rect.x, y: rect.y, w: rect.w, h: peekPx },                 // top strip
-    { x: rect.x, y: rect.y + rect.h - peekPx, w: rect.w, h: peekPx },// bottom strip
-    { x: rect.x, y: rect.y, w: peekPx, h: rect.h },                 // left strip
-    { x: rect.x + rect.w - peekPx, y: rect.y, w: peekPx, h: rect.h } // right strip
-  ];
+    const strips = [
+      { x: rect.x, y: rect.y, w: rect.w, h: peekPx },                  // top
+      { x: rect.x, y: rect.y + rect.h - peekPx, w: rect.w, h: peekPx },// bottom
+      { x: rect.x, y: rect.y, w: peekPx, h: rect.h },                  // left
+      { x: rect.x + rect.w - peekPx, y: rect.y, w: peekPx, h: rect.h } // right
+    ];
 
-  // A strip is “good” if less than ~70% of that strip is covered by ANY single prior image
-  const STRIP_MAX_COVER = 0.80;
+    const STRIP_MAX_COVER = 0.80;
 
-  return strips.some(strip => {
-    const stripArea = strip.w * strip.h;
-    if (stripArea <= 0) return false;
+    return strips.some(strip => {
+      const stripArea = strip.w * strip.h;
+      if (stripArea <= 0) return false;
 
-    const maxCover = placed.reduce((m, p) => {
-      const covered = overlapArea(strip, p);
-      return Math.max(m, covered / stripArea);
-    }, 0);
+      const maxCover = placed.reduce((m, p) => {
+        const covered = overlapArea(strip, p);
+        return Math.max(m, covered / stripArea);
+      }, 0);
 
-    return maxCover < STRIP_MAX_COVER;
-  });
-}
-
+      return maxCover < STRIP_MAX_COVER;
+    });
+  }
 
   function placeWithLimit(cw, ch, w, h, placed) {
     const pad = 10;
     const tries = 140;
 
     for (let i = 0; i < tries; i++) {
-      const peekPx = 40; // how much exposed edge we require
+      const peekPx = 40;
       const x = clamp(rand(0, cw - w), pad, Math.max(pad, cw - w - pad));
       const y = clamp(rand(0, ch - h), pad, Math.max(pad, ch - h - pad));
       const rect = { x, y, w, h };
 
-      // Peek rule: ensure at least one edge strip stays clickable
       if (!edgePeekOK(rect, placed, peekPx)) continue;
 
-
-      // Max coverage by any single prior image
       const maxCover = placed.reduce(
         (m, p) => Math.max(m, overlapArea(rect, p) / (w * h)),
         0
       );
 
-      // Allow overlap, but reject “mostly covered” placements
       if (maxCover < 0.55) return rect;
-
     }
 
-// Fallback: place near top-left-ish in a stepped stack so it's never lost
-const step = 28;
-const idx = placed.length; // 0..n
-return {
-  x: 14 + (idx * step) % Math.max(14, (cw - w - 28)),
-  y: 14 + (idx * step) % Math.max(14, (ch - h - 28)),
-  w, h
-};
-
-
-    // Fallback
+    // Fallback: stepped stack so it's never lost
+    const step = 28;
+    const idx = placed.length;
     return {
-      x: clamp(rand(0, cw - w), pad, Math.max(pad, cw - w - pad)),
-      y: clamp(rand(0, ch - h), pad, Math.max(pad, ch - h - pad)),
-      w,
-      h,
+      x: 14 + (idx * step) % Math.max(14, (cw - w - 28)),
+      y: 14 + (idx * step) % Math.max(14, (ch - h - 28)),
+      w, h
     };
   }
 
@@ -178,12 +159,15 @@ return {
   // Cascade init
   // -------------------------
   function initCascade(container) {
+    // Guard: don't init twice (prevents “stuck opacity 0” from re-runs)
+    if (container.dataset.cascadeInit === "1") return;
+    container.dataset.cascadeInit = "1";
+
     const imgs = Array.from(container.querySelectorAll(".cascade-img"));
     if (!imgs.length) return;
 
     const viewer = createViewer();
 
-    // Wait for images so layout sizes are real
     const ready = imgs.map((img) => {
       if (img.complete) return Promise.resolve();
       return new Promise((res) => img.addEventListener("load", res, { once: true }));
@@ -196,23 +180,19 @@ return {
       let z = 10;
       const placed = [];
 
-      // page-only gallery items
       const items = imgs.map((img) => ({
         src: img.src,
         caption: img.getAttribute("alt") || "",
       }));
 
       imgs.forEach((img, idx) => {
-        // Random rotation / scale
         const rot = rand(-12, 12);
         const scale = rand(0.98, 1.02);
 
-        // Use actual CSS width/height after load
         const rectNow = img.getBoundingClientRect();
         const w = rectNow.width || 260;
         const h = rectNow.height || 180;
 
-        // Place with overlap limit
         const pos = placeWithLimit(cw, ch, w, h, placed);
         placed.push(pos);
 
@@ -221,12 +201,11 @@ return {
         img.style.zIndex = String(z++);
         img.style.transform = `rotate(${rot}deg) scale(${scale}) translateZ(0)`;
 
-        // Reveal (your CSS starts opacity 0)
+        // Reveal reliably
         requestAnimationFrame(() => {
           img.style.opacity = "1";
         });
 
-        // Lift on hover / click
         const lift = () => {
           img.style.zIndex = String(++z);
         };
@@ -234,7 +213,6 @@ return {
         img.addEventListener("mouseenter", lift);
         img.addEventListener("mousedown", lift);
 
-        // Click opens viewer at this index
         img.addEventListener("click", () => {
           lift();
           viewer._openAt(items, idx);
@@ -242,9 +220,12 @@ return {
       });
     });
   }
-  
-    // Public init
+
+  // Public init (kept)
   window.initWindwoodCascade = function () {
     document.querySelectorAll("[data-cascade]").forEach(initCascade);
   };
+
+ 
 })();
+
