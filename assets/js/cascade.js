@@ -108,7 +108,7 @@ if (tooClose) continue;
   
   <figure class="ww-viewer-figure" role="dialog" aria-modal="true">
     <img class="ww-viewer-img" alt="">
-    <figcaption class="ww-viewer-cap"></figcaption>
+    
     
   </figure>
 `;

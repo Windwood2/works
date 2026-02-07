@@ -63,7 +63,7 @@
 
   /* Layout */
   --t-page-padding: 28px;
-  --max-width: 980px;
+  --max-width: 1080px;
 
   /* Gallery cards */
   --t-card-radius: 12px;
@@ -168,7 +168,7 @@
    ========================= */
 html.theme-forest{
   --c-bg-page:   #333d29;
-  --c-bg-panel:  #2b3324;
+  --c-bg-panel:  rgba(73,86,59,0.50);
 
   --c-text-main: #EDD9C7;
   --c-text-soft: #E3D0B8;
@@ -821,8 +821,8 @@ figcaption.caption{
   position: absolute;
   z-index: 10;
 
-  width: 320px;
-  background: var(--mat-bg);
+  width: 420px;
+  background: rgba(73,86,59,1.0);   /* image mat color*/
   padding: 6px;
   border: 1px solid var(--border-soft);
   border-radius: 10px;
