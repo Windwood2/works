@@ -812,8 +812,8 @@ figcaption.caption{
   z-index: 5;
   overflow: visible;
   width: 100%;
-  height: 900px;
-  max-height: 1800px;
+  height: 1400px;
+  max-height: 2200px;
   margin: 0 auto;
 }
 
@@ -850,6 +850,9 @@ figcaption.caption{
   z-index:5000;
 }
 #ww-viewer.open{ display:block; }
+#ww-viewer.open .ww-viewer-img.zoomed{
+  cursor: grab;
+}
 
 .ww-viewer-backdrop{
   position:absolute;
@@ -862,28 +865,36 @@ figcaption.caption{
   left:50%;
   top:50%;
   transform: translate(-50%,-50%);
-  max-width: min(92vw, 1100px);
+  max-width: min(96vw, 1600px);
   max-height: 86vh;
   margin:0;
 
   background: var(--bg-panel);
   border: 1px solid var(--border-soft);
   border-radius: 14px;
-  padding: 14px;
+  padding: 6px;
   box-shadow: 0 20px 60px rgba(0,0,0,0.6);
+  overflow: visible;
+
 }
 
 .ww-viewer-img{
   display:block;
   max-width: 100%;
-  max-height: 72vh;
+  max-height: 82vh;
   height:auto;
   margin: 0 auto 10px;
   border-radius: 10px;
   background: var(--mat-bg);
   padding: 6px;
   border: 1px solid var(--border-soft);
+  cursor: zoom-in;
+  transform-origin: center center;
+  transition: transform 0.12s ease;
+  position: relative;
+  z-index: 1;
 }
+
 
 .ww-viewer-cap{
   color: var(--caption-color);
@@ -906,37 +917,56 @@ figcaption.caption{
   cursor:pointer;
   font-size: 22px;
   line-height: 0;
+  
+  z-index: 20;
 }
 .ww-viewer-close:hover{
   background: var(--pill-hover-bg);
   border-color: var(--pill-hover-border);
 }
 
+/* ===== Cascade viewer arrows (clean + stable) ===== */
 .ww-viewer-prev,
 .ww-viewer-next{
-  position:absolute;
+  position: fixed;                     /* anchor to viewport */
   top: 50%;
   transform: translateY(-50%);
+  
   width: 40px;
   height: 44px;
+  display: grid;
+  place-items: center;
+
   border-radius: 12px;
   border: 1px solid var(--border-soft);
   background: var(--pill-bg);
   color: var(--pill-text);
-  cursor: pointer;
+
   font-size: 28px;
-  line-height: 0;
-  display: grid;
-  place-items: center;
-  opacity: 0.9;
+  line-height: 1;
+  cursor: pointer;
+
+  z-index: 40;                          /* ABOVE zoomed image */
+  opacity: 0.75;
+  pointer-events: auto;
+
+  transition:
+    background-color 0.15s ease,
+    border-color 0.15s ease,
+    opacity 0.15s ease;
 }
-.ww-viewer-prev{ left: 10px; }
-.ww-viewer-next{ right: 10px; }
+
+/* Near page edges, not image edges */
+.ww-viewer-prev{ left: 4vw; }
+.ww-viewer-next{ right: 4vw; }
 
 .ww-viewer-prev:hover,
 .ww-viewer-next:hover{
   background: var(--pill-hover-bg);
   border-color: var(--pill-hover-border);
+  opacity: 1;
+}
+
 }
 
 
@@ -948,8 +978,8 @@ main{ padding-top: 0.5rem !important; }
   /* Let content breathe edge-to-edge */
   .page-container{
 	max-width: 100%;
-    padding-left: 0px;
-    padding-right: 0px;
+    padding-left: 10px;
+    padding-right: 10px;
   }
 
   /* Reduce card padding on mobile */

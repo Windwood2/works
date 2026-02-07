@@ -52,10 +52,21 @@
     const tries = 140;
 
     for (let i = 0; i < tries; i++) {
-      const peekPx = 40;
+      const peekPx = 30;
       const x = clamp(rand(0, cw - w), pad, Math.max(pad, cw - w - pad));
       const y = clamp(rand(0, ch - h), pad, Math.max(pad, ch - h - pad));
       const rect = { x, y, w, h };
+	  // Soft spacing bias — avoid tight clustering
+const MIN_DIST = 170; // increase = more even spread
+
+const tooClose = placed.some(p => {
+  const dx = (p.x + p.w / 2) - (x + w / 2);
+  const dy = (p.y + p.h / 2) - (y + h / 2);
+  return Math.hypot(dx, dy) < MIN_DIST;
+});
+
+if (tooClose) continue;
+
 
       if (!edgePeekOK(rect, placed, peekPx)) continue;
 
@@ -64,7 +75,7 @@
         0
       );
 
-      if (maxCover < 0.55) return rect;
+      if (maxCover < 0.40) return rect;
     }
 
     // Fallback: stepped stack so it's never lost
@@ -80,80 +91,142 @@
   // -------------------------
   // Viewer (page-only)
   // -------------------------
-  function createViewer() {
-    let overlay = document.getElementById("ww-viewer");
-    if (overlay) return overlay;
+ function createViewer() {
+  let overlay = document.getElementById("ww-viewer");
+  if (overlay) return overlay;
 
-    overlay = document.createElement("div");
-    overlay.id = "ww-viewer";
-    overlay.setAttribute("aria-hidden", "true");
+  overlay = document.createElement("div");
+  overlay.id = "ww-viewer";
+  overlay.setAttribute("aria-hidden", "true");
 
-    overlay.innerHTML = `
-      <div class="ww-viewer-backdrop"></div>
-      <figure class="ww-viewer-figure" role="dialog" aria-modal="true">
-        <button class="ww-viewer-prev" aria-label="Previous">‹</button>
-        <img class="ww-viewer-img" alt="">
-        <button class="ww-viewer-next" aria-label="Next">›</button>
-        <figcaption class="ww-viewer-cap"></figcaption>
-        <button class="ww-viewer-close" aria-label="Close">×</button>
-      </figure>
-    `;
+  overlay.innerHTML = `
+  <div class="ww-viewer-backdrop"></div>
 
-    document.body.appendChild(overlay);
+  <button class="ww-viewer-prev" aria-label="Previous">‹</button>
+  <button class="ww-viewer-next" aria-label="Next">›</button>
 
-    function close() {
-      overlay.classList.remove("open");
-      overlay.setAttribute("aria-hidden", "true");
-    }
+  <figure class="ww-viewer-figure" role="dialog" aria-modal="true">
+    <img class="ww-viewer-img" alt="">
+    <figcaption class="ww-viewer-cap"></figcaption>
+    <button class="ww-viewer-close" aria-label="Close">×</button>
+  </figure>
+`;
 
-    overlay.addEventListener("click", (e) => {
-      if (
-        e.target.classList.contains("ww-viewer-backdrop") ||
-        e.target.classList.contains("ww-viewer-close")
-      ) {
-        close();
-      }
-    });
 
-    overlay.querySelector(".ww-viewer-prev").addEventListener("click", () => {
-      overlay._show(overlay._index - 1);
-    });
-    overlay.querySelector(".ww-viewer-next").addEventListener("click", () => {
-      overlay._show(overlay._index + 1);
-    });
+  document.body.appendChild(overlay);
 
-    window.addEventListener("keydown", (e) => {
-      if (!overlay.classList.contains("open")) return;
-      if (e.key === "Escape") close();
-      if (e.key === "ArrowLeft") overlay._show(overlay._index - 1);
-      if (e.key === "ArrowRight") overlay._show(overlay._index + 1);
-    });
+  const img = overlay.querySelector(".ww-viewer-img");
+  const cap = overlay.querySelector(".ww-viewer-cap");
 
-    overlay._items = [];
-    overlay._index = 0;
+  /* =========================
+     ZOOM STATE (GLOBAL TO VIEWER)
+     ========================= */
+  let scale = 1;
+  let panX = 0;
+  let panY = 0;
+  let isPanning = false;
+  let startX = 0;
+  let startY = 0;
 
-    overlay._show = function (i) {
-      if (!overlay._items.length) return;
-      overlay._index = (i + overlay._items.length) % overlay._items.length;
-
-      const item = overlay._items[overlay._index];
-      const img = overlay.querySelector(".ww-viewer-img");
-      const cap = overlay.querySelector(".ww-viewer-cap");
-
-      img.src = item.src;
-      img.alt = item.caption || "";
-      cap.textContent = item.caption || "";
-    };
-
-    overlay._openAt = function (items, index) {
-      overlay._items = items;
-      overlay.classList.add("open");
-      overlay.setAttribute("aria-hidden", "false");
-      overlay._show(index);
-    };
-
-    return overlay;
+  function applyTransform() {
+    img.style.transform = `translate(${panX}px, ${panY}px) scale(${scale})`;
+    img.classList.toggle("zoomed", scale > 1);
   }
+
+  function resetZoom() {
+    scale = 1;
+    panX = 0;
+    panY = 0;
+    applyTransform();
+  }
+
+  /* =========================
+     ZOOM EVENTS (ONCE)
+     ========================= */
+  img.addEventListener("wheel", (e) => {
+    e.preventDefault();
+    const delta = -e.deltaY * 0.0015;
+    scale = Math.min(4, Math.max(1, scale + delta));
+    if (scale === 1) { panX = 0; panY = 0; }
+    applyTransform();
+  }, { passive: false });
+
+  img.addEventListener("mousedown", (e) => {
+    if (scale <= 1) return;
+    isPanning = true;
+    startX = e.clientX - panX;
+    startY = e.clientY - panY;
+    img.style.cursor = "grabbing";
+  });
+
+  window.addEventListener("mousemove", (e) => {
+    if (!isPanning) return;
+    panX = e.clientX - startX;
+    panY = e.clientY - startY;
+    applyTransform();
+  });
+
+  window.addEventListener("mouseup", () => {
+    isPanning = false;
+    img.style.cursor = scale > 1 ? "grab" : "zoom-in";
+  });
+
+  /* =========================
+     VIEWER LOGIC
+     ========================= */
+  overlay._items = [];
+  overlay._index = 0;
+
+  overlay._show = function (i) {
+    if (!overlay._items.length) return;
+    overlay._index = (i + overlay._items.length) % overlay._items.length;
+    const item = overlay._items[overlay._index];
+
+    img.src = item.src;
+    img.alt = item.caption || "";
+    cap.textContent = item.caption || "";
+
+    resetZoom(); // ✅ always reset on image change
+  };
+
+  overlay._openAt = function (items, index) {
+    overlay._items = items;
+    overlay.classList.add("open");
+    overlay.setAttribute("aria-hidden", "false");
+    overlay._show(index);
+  };
+
+  function close() {
+    overlay.classList.remove("open");
+    overlay.setAttribute("aria-hidden", "true");
+    resetZoom();
+  }
+
+  overlay.addEventListener("click", (e) => {
+    if (
+      e.target.classList.contains("ww-viewer-backdrop") ||
+      e.target.classList.contains("ww-viewer-close")
+    ) close();
+  });
+
+  overlay.querySelector(".ww-viewer-prev").addEventListener("click", () => {
+    overlay._show(overlay._index - 1);
+  });
+
+  overlay.querySelector(".ww-viewer-next").addEventListener("click", () => {
+    overlay._show(overlay._index + 1);
+  });
+
+  window.addEventListener("keydown", (e) => {
+    if (!overlay.classList.contains("open")) return;
+    if (e.key === "Escape") close();
+    if (e.key === "ArrowLeft") overlay._show(overlay._index - 1);
+    if (e.key === "ArrowRight") overlay._show(overlay._index + 1);
+  });
+
+  return overlay;
+}
+
 
   // -------------------------
   // Cascade init
@@ -215,7 +288,8 @@
 
         img.addEventListener("click", () => {
           lift();
-          viewer._openAt(items, idx);
+          viewer._openAt(items, idx);resetZoom();
+
         });
       });
     });
