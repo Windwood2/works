@@ -104,11 +104,12 @@ if (tooClose) continue;
 
   <button class="ww-viewer-prev" aria-label="Previous">‹</button>
   <button class="ww-viewer-next" aria-label="Next">›</button>
-
+  <button class="ww-viewer-close" aria-label="Close">×</button>
+  
   <figure class="ww-viewer-figure" role="dialog" aria-modal="true">
     <img class="ww-viewer-img" alt="">
     <figcaption class="ww-viewer-cap"></figcaption>
-    <button class="ww-viewer-close" aria-label="Close">×</button>
+    
   </figure>
 `;
 
@@ -194,12 +195,15 @@ if (tooClose) continue;
     overlay.classList.add("open");
     overlay.setAttribute("aria-hidden", "false");
     overlay._show(index);
+	document.body.classList.add("viewer-open");
   };
 
   function close() {
     overlay.classList.remove("open");
     overlay.setAttribute("aria-hidden", "true");
     resetZoom();
+	document.body.classList.remove("viewer-open");
+
   }
 
   overlay.addEventListener("click", (e) => {
