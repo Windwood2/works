@@ -42,11 +42,23 @@
 .lightbox-arrow.left { left: 20px; }
 .lightbox-arrow.right { right: 20px; }
 
-.lightbox-close {
-  position: absolute;
+.lightbox-close{
+  position: fixed;
   top: 18px;
   right: 28px;
+
+  background: none;
+  border: none;
+  padding: 0;
+
   font-size: 2rem;
+  line-height: 1;
   color: #d6a86a;
   cursor: pointer;
+
+  appearance: none;
+  -webkit-appearance: none;
+
+  z-index: 3000;
 }
+
