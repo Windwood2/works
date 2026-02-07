@@ -112,7 +112,7 @@ if (tooClose) continue;
     
   </figure>
 `;
-
+/* <figcaption class="ww-viewer-cap"></figcaption>    removed  caption from just above </figure> */
 
   document.body.appendChild(overlay);
 
@@ -190,13 +190,18 @@ if (tooClose) continue;
     resetZoom(); // ✅ always reset on image change
   };
 
-  overlay._openAt = function (items, index) {
-    overlay._items = items;
-    overlay.classList.add("open");
-    overlay.setAttribute("aria-hidden", "false");
-    overlay._show(index);
-	document.body.classList.add("viewer-open");
-  };
+ overlay._openAt = function (items, index) {
+  overlay._items = items;
+  overlay._index = index;              // ✅ ADD THIS
+
+  document.body.classList.add("viewer-open");
+
+  overlay.classList.add("open");
+  overlay.setAttribute("aria-hidden", "false");
+
+  overlay._show(index);                // resetZoom happens inside _show
+};
+
 
   function close() {
     overlay.classList.remove("open");
