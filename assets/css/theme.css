@@ -49,10 +49,10 @@
   /* Typography knobs */
   --t-site-title-size: 4.2rem;       /* "Windwood Designs" size */
   --t-site-title-margin-bottom: 2px; /* space under site title */
-  --t-page-title-size: 1.8rem;       /* big page title */
+  --t-page-title-size: 2rem;       /* big page title */
   --t-section-title-size: 1.6rem;    /* section title */
-  --t-body-line-height: 1;        /* body readability */
-  --t-caption-size: 0.9rem;         /* image caption size */
+  --t-body-line-height: 1.3;        /* body readability */
+  --t-caption-size: 1rem;         /* image caption size */
 
   /* Buttons (nav + top + secret-nav pills) */
   --t-pill-pad-y: 8px;
@@ -302,6 +302,9 @@ html.theme-debug{
   --section-title-color: lime;
 }
 
+main h1 {
+  text-align: center;
+}
 
 
 /* =========================================================
@@ -330,6 +333,12 @@ body{
   background-attachment: fixed;
 
   -webkit-font-smoothing: antialiased;
+}
+
+
+.section-title {
+  text-align: center;
+  
 }
 
 .page-container{
@@ -582,7 +591,7 @@ body{
   background: linear-gradient(
     to right,
     rgba(255,255,255,0) 0%,
-    var(--divider-faint) 50%,
+    rgba(153,102,51,1.0) 50%,
     rgba(255,255,255,0) 100%
   );
 }
@@ -593,8 +602,8 @@ body{
   background: linear-gradient(
     to right,
     rgba(0,0,0,0) 0%,
-    var(--divider-accent) 40%,
-    var(--divider-accent) 60%,
+    #330000 40%,
+    #330000 60%,
     rgba(0,0,0,0) 100%
   );
 }
@@ -612,6 +621,8 @@ body{
   color: var(--page-title-color);
   text-align: center;
   margin: 0 0 var(--space-md);
+  margin-bottom: 2.5rem; /* try 2rem–3rem */
+  margin-top: 2.5rem; /* try 2rem–3rem */
 }
 
 .section-title{
@@ -622,6 +633,8 @@ body{
   line-height: 1.15;
   color: var(--section-title-color);
   margin: var(--space-md) 0 0.5rem;
+  margin-bottom: 2.5rem; /* try 2rem–3rem */
+  margin-top: 2.5rem; /* try 2rem–3rem */
 }
 
 .page-description{
@@ -959,6 +972,20 @@ figcaption.caption{
 .ww-viewer-close:hover{
   opacity: 1;
 }
+/* AI Images: force single-column layout */
+.gallery.ai-gallery{
+  grid-template-columns: 1fr;
+}
+.gallery figcaption{
+  white-space: normal;        /* allow wrapping */
+  overflow: visible;          /* no clipping */
+  text-overflow: unset;       /* remove ellipsis */
+  line-height: 1.5;           /* helps readability */
+}
+.gallery figcaption{
+  max-width: 60ch;            /* readable line length */
+  margin: 0.5rem auto 0;
+}
 
 
 /* Small spacing tweak (kept from your original) */
@@ -993,6 +1020,8 @@ main{ padding-top: 0.5rem !important; }
 	margin: 0;
   }
 }
+
+
 /* =========================================================
    Mobile-only viewer behavior
    ========================================================= */
