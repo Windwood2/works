@@ -14,5 +14,5 @@ if errorlevel 1 (
   echo Server already running on port 8000.
 )
 
-exit
+pause
 
