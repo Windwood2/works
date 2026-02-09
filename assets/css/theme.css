@@ -47,7 +47,7 @@
    ========================= */
 :root{
   /* Typography knobs */
-  --t-site-title-size: 4.5rem;       /* "Windwood Designs" size */
+  --t-site-title-size: 6.5rem;       /* "Windwood Designs" size */
   --t-site-title-margin-bottom: 2px; /* space under site title */
   --t-page-title-size: 2rem;       /* big page title */
   --t-section-title-size: 1.6rem;    /* section title */
@@ -355,6 +355,8 @@ body{
 .navbar{
   background: transparent;
   margin-bottom: var(--space-sm);
+  padding-top: 18px;
+  padding-left: 18px;
 }
 
 /* Centers the whole header group on the page */
@@ -363,7 +365,7 @@ body{
   align-items: center;
   justify-content: center;   /* centers the whole header as a group */
   gap: 50px;
-  margin-right: 70px;
+  margin-right: 40px;
   position: relative;
 }
 
@@ -505,7 +507,7 @@ body{
   .navbar-inner{
 	width: 100%;
 	justify-content: flex-start;   /* title sits left */
-    padding-right: 52px;           /* reserve space for burger */
+    padding-right: 42px;           /* reserve space for burger */
     display: grid;
     grid-template-columns: 1fr;  /* title | hamburger */
     align-items: center;
@@ -514,9 +516,9 @@ body{
 
   /* Keep your title readable on mobile */
   .site-title{
-    font-size: 3.0rem;     /* tweak to taste */
+    font-size: 4.0rem;     /* tweak to taste */
     line-height: 0.9;
-    text-align: left;      /* looks more natural with hamburger right */
+    text-align: center;      /* looks more natural with hamburger right */
     margin: 2;
 	white-space: pre-line;
   }
@@ -549,8 +551,6 @@ body{
   }
   
 }
-
-
 
 
 /* =========================================================
@@ -621,7 +621,7 @@ body{
   color: var(--page-title-color);
   text-align: center;
   margin: 0 0 var(--space-md);
-  margin-bottom: 2.5rem; /* try 2rem–3rem */
+  margin-bottom: 0.5rem; /* try 2rem–3rem */
   margin-top: 2.5rem; /* try 2rem–3rem */
 }
 
