@@ -166,6 +166,8 @@
    4) THEMES
    Forest is your “final” tuning target.
    ========================= */
+   
+   
 html.theme-forest{
   --c-bg-page:   #333d29;
   --c-bg-panel:  rgba(73,86,59,0.50);
@@ -175,7 +177,7 @@ html.theme-forest{
   --c-wood-dark: #24301f;   /* pill/mat fill */
   --c-wood-ink:  #be7a2d;   /* wood-toned ink (titles + buttons) */
 
-  --c-line-soft: rgba(51,0,0,0.42);
+  --c-line-soft: rgba(190,122,45,0.48);
   --c-line-strong: rgba(176,138,87,0.78);
 
   --c-caption: rgba(249,207,134,0.85);
@@ -192,8 +194,7 @@ html.theme-forest{
 
 /* =========================
    4) THEMES
-   Forest is your “final” tuning target.
-   ========================= */
+      ========================= */
 
 /* Default (baseline) */
 html.theme-default{
@@ -336,11 +337,6 @@ body{
 }
 
 
-.section-title {
-  text-align: center;
-  
-}
-
 .page-container{
   max-width: var(--max-width);
   margin: 0 auto;
@@ -404,11 +400,10 @@ body{
   margin: 0 0 var(--t-site-title-margin-bottom);
   color: var(--site-title-color);
   text-align: center;
-
   text-shadow:
-    -4px 2px 7px rgba(0,0,0,0.55),
+    -3px 2px 5px rgba(0,0,0,0.85),
   /* Bright highlight: up + right */  
-   3px -2px 2px rgba(255,255,255,0.15);
+   1px 0px 3px rgba(255,255,255,0.55);
 }
 
 .site-sub{
@@ -431,6 +426,8 @@ body{
 /* Pill style shared: nav + secret nav + Top */
 .nav-links a,
 .secret-nav a,
+
+
 #back-to-top{
   display: inline-block;
   font-family: var(--font-accent);
@@ -451,6 +448,8 @@ body{
 
 .nav-links a:hover,
 .secret-nav a:hover,
+
+
 #back-to-top:hover{
   background-color: var(--pill-hover-bg);
   border-color: var(--pill-hover-border);
@@ -579,7 +578,7 @@ body{
   margin: 10px auto;
   display: flex;
   flex-direction: column;
-  gap: 3px;
+  gap: 1px;
   align-items: center;
 }
 
@@ -587,7 +586,7 @@ body{
 
 .divider-line{
   width: 80%;
-  height: 1px;
+  height: 2px;
   background: linear-gradient(
     to right,
     rgba(255,255,255,0) 0%,
@@ -602,8 +601,8 @@ body{
   background: linear-gradient(
     to right,
     rgba(0,0,0,0) 0%,
-    #330000 40%,
-    #330000 60%,
+    rgba(51,0,0,0.5)40%,
+    rgba(51.0.0,0.5) 60%,
     rgba(0,0,0,0) 100%
   );
 }
@@ -621,20 +620,35 @@ body{
   color: var(--page-title-color);
   text-align: center;
   margin: 0 0 var(--space-md);
-  margin-bottom: 0.5rem; /* try 2rem–3rem */
+  margin-bottom: 3rem; /* try 2rem–3rem */
   margin-top: 2.5rem; /* try 2rem–3rem */
+  text-shadow:
+   -3px 2px 5px rgba(0,0,0,0.55),
+  /* Bright highlight: up + right */  
+   2px -1px 1px rgba(255,255,255,0.45),
+/* Big, obvious drop shadow: down + left */
+    -5px 6px 12px rgba(30,30,30,0.25);
+
 }
 
 .section-title{
   font-family: var(--font-title);
   font-size: var(--t-section-title-size);
+  text-align: center;
   font-weight: 600;
   letter-spacing: 0.01em;
   line-height: 1.15;
   color: var(--section-title-color);
   margin: var(--space-md) 0 0.5rem;
-  margin-bottom: 2.5rem; /* try 2rem–3rem */
-  margin-top: 2.5rem; /* try 2rem–3rem */
+  margin-bottom: 1.5rem; /* try 2rem–3rem */
+  margin-top: 1.5rem; /* try 2rem–3rem */
+  text-shadow:
+   -3px 2px 5px rgba(0,0,0,0.55),
+  /* Bright highlight: up + right */  
+   2px -1px 1px rgba(255,255,255,0.45),
+/* Big, obvious drop shadow: down + left */
+    -5px 6px 12px rgba(30,30,30,0.25);
+
 }
 
 .page-description{
@@ -653,14 +667,34 @@ body{
 }
 .homepage-list li{ margin: 0.35rem 0; }
 
-.about-photo img,
+.about-photo img{
+  display:block;
+  max-width: 100%;
+  max-height: 82vh;
+  height:auto;
+  margin: 0 auto 10px;
+  border-radius: 10px;
+  background: var(--mat-bg);
+  padding: 6px;
+  border: 1px solid var(--border-soft);
+  cursor: zoom-in;
+  transform-origin: center center;
+  transition: transform 0.12s ease;
+  position: relative;
+  
+}
 .contact-photo img{
   display:block;
   height:auto;
   margin:0 auto;
-  max-width: 100%;
+  width: 380px; max-width: 80%;
+  border-radius: 10px;
+  background: var(--mat-bg);
+  padding: 12px;
+  border: 1px solid var(--border-soft);
+  margin-bottom: 4rem;
+  
 }
-.contact-photo img{ width: 350px; max-width: 80%; }
 
 
 /* =========================================================
@@ -720,10 +754,10 @@ figcaption.caption{
    ========================================================= */
 .secret-nav{
   margin-top: 3rem;
-  padding-top: 1rem;
+  padding-top: 2rem;
   text-align: center;
   border-top: 1px solid var(--border-soft);
-  opacity: 0.75;
+  opacity: 0.95;
   font-size: 0.9rem;
 }
 
@@ -1085,20 +1119,11 @@ main{ padding-top: 0.5rem !important; }
 
 }
 
-.page-title{
-  text-shadow:
-   -3px 2px 5px rgba(0,0,0,0.55),
-  /* Bright highlight: up + right */  
-   3px -2px 2px rgba(255,255,255,0.25),
-/* Big, obvious drop shadow: down + left */
-   -10px 14px 28px rgba(130,130,130,0.65);
-
-}
 .section-title{
   text-shadow:
      -3px 2px 5px rgba(0,0,0,0.55),
   /* Bright highlight: up + right */  
-   3px -2px 2px rgba(255,255,255,0.25),
+   2px -1px 1px rgba(255,255,255,0.45),
 /* Big, obvious drop shadow: down + left */
-   -10px 14px 28px rgba(130,130,130,0.65);
+   -5px 6px 12px rgba(30,30,30,0.25);
 }
