@@ -47,7 +47,7 @@
    ========================= */
 :root{
   /* Typography knobs */
-  --t-site-title-size: 4.2rem;       /* "Windwood Designs" size */
+  --t-site-title-size: 4.5rem;       /* "Windwood Designs" size */
   --t-site-title-margin-bottom: 2px; /* space under site title */
   --t-page-title-size: 2rem;       /* big page title */
   --t-section-title-size: 1.6rem;    /* section title */
@@ -173,7 +173,7 @@ html.theme-forest{
   --c-text-main: #EDD9C7;
   --c-text-soft: #E3D0B8;
   --c-wood-dark: #24301f;   /* pill/mat fill */
-  --c-wood-ink:  #b08a57;   /* wood-toned ink (titles + buttons) */
+  --c-wood-ink:  #be7a2d;   /* wood-toned ink (titles + buttons) */
 
   --c-line-soft: rgba(176,138,87,0.42);
   --c-line-strong: rgba(176,138,87,0.78);
@@ -182,8 +182,8 @@ html.theme-forest{
   --c-pill-hover: #49563b;
 
   /* Optional: make page titles a touch brighter than nav text */
-  --page-title-color: #b5753e;
-  --section-title-color: #caa06a;
+  --page-title-color: #be7a2d;
+  --section-title-color: #be7a2d;
 
   /* Optional: keep site title a hair “goldier” */
   --site-title-color: #8f4300;
@@ -382,7 +382,7 @@ body{
 .site-title{
   display: flex;
   flex-direction: column;    /* makes the two spans stack */
-  line-height: 0.85;         /* tighten spacing between the two lines */
+  line-height: 0.95;         /* tighten spacing between the two lines */
   white-space: nowrap;       /* prevents weird wrapping */
   flex: 0 0 auto;            /* don't let it stretch/shrink */
 }
@@ -404,9 +404,9 @@ body{
   text-align: center;
 
   text-shadow:
-    0 1px 0 rgba(255,255,255,0.08),
-    0 -1px 0 rgba(0,0,0,0.55),
-    0 6px 14px rgba(0,0,0,0.35);
+    -4px 2px 7px rgba(0,0,0,0.55),
+  /* Bright highlight: up + right */  
+   3px -2px 2px rgba(255,255,255,0.15);
 }
 
 .site-sub{
@@ -638,7 +638,7 @@ body{
 }
 
 .page-description{
-  max-width: 60ch;
+  max-width: 80ch;
   margin: 0 auto var(--space-lg);
   color: var(--text-muted);
   line-height: 1.6;
@@ -1043,4 +1043,22 @@ main{ padding-top: 0.5rem !important; }
       radial-gradient(circle at 50% 50%, rgba(0,0,0,0.00) 46%, rgba(0,0,0,0.38) 100%);
   }
 
+}
+
+.page-title{
+  text-shadow:
+   -4px 2px 7px rgba(0,0,0,0.55),
+  /* Bright highlight: up + right */  
+   3px -2px 2px rgba(255,255,255,0.25),
+/* Big, obvious drop shadow: down + left */
+   -10px 14px 28px rgba(130,130,130,0.25);
+
+}
+.section-title{
+  text-shadow:
+    -4px 2px 7px rgba(0,0,0,0.55),
+  /* Bright highlight: up + right */  
+   3px -2px 2px rgba(255,255,255,0.25),
+/* Big, obvious drop shadow: down + left */
+   -10px 14px 28px rgba(130,130,130,0.25);
 }
