@@ -175,7 +175,7 @@ html.theme-forest{
   --c-wood-dark: #24301f;   /* pill/mat fill */
   --c-wood-ink:  #be7a2d;   /* wood-toned ink (titles + buttons) */
 
-  --c-line-soft: rgba(176,138,87,0.42);
+  --c-line-soft: rgba(51,0,0,0.42);
   --c-line-strong: rgba(176,138,87,0.78);
 
   --c-caption: rgba(249,207,134,0.85);
@@ -790,6 +790,12 @@ figcaption.caption{
 
 /* =========================================================
    Desktop-only “frame” lines at page width edges
+   DESKTOP FRAME LINES (page edge vertical lines)
+   Only shows on screens wider than 820px
+   Edit color/opacity/position here
+   ========================================================= */
+/* =========================================================
+   DESKTOP FRAME LINES (double-line, two colors)
    ========================================================= */
 @media (min-width: 821px){
   .page-container::before,
@@ -798,23 +804,57 @@ figcaption.caption{
     position:absolute;
     top: 0;
     bottom: 0;
-    width: 13px;    /* edge lines on page*/
 
+    /* total thickness of the “double line” */
+    width: 2px;
+
+    /* two 1px stripes: highlight + shadow */
     background: linear-gradient(
+      to right,
+      var(--frame-hi) 0 1px,
+      var(--frame-lo) 1px 2px
+    );
+
+    /* fade top/bottom so it’s not a hard bar */
+    -webkit-mask-image: linear-gradient(
       to bottom,
-      rgba(0,0,0,0) 0%,
-      var(--border-soft) 12%,
-      var(--border-soft) 88%,
-      rgba(0,0,0,0) 100%
+      transparent 0%,
+      #000 12%,
+      #000 88%,
+      transparent 100%
+    );
+    mask-image: linear-gradient(
+      to bottom,
+      transparent 0%,
+      #000 12%,
+      #000 88%,
+      transparent 100%
     );
 
     pointer-events:none;
     opacity: 0.85;
   }
 
-  .page-container::before{ left: 0; }
-  .page-container::after{ right: 0; }
+  /* Left edge: keep highlight “inside”, shadow “outside” */
+  .page-container::before{
+    left: 0;
+    --frame-hi:  rgba(153,102,51,0.75);
+    --frame-lo: rgba(51,0,0,0.55);
+  }
+
+  /* Right edge: flip it so highlight is still “inside” */
+  .page-container::after{
+    right: 0;
+    background: linear-gradient(
+      to right,
+      var(--frame-lo) 0 1px,
+      var(--frame-hi) 1px 2px
+    );    
+    --frame-lo: rgba(51,0,0,0.55);
+    --frame-hi:  rgba(153,102,51,0.75);
+  }
 }
+
 
 
 /* =========================================================
@@ -1047,18 +1087,18 @@ main{ padding-top: 0.5rem !important; }
 
 .page-title{
   text-shadow:
-   -4px 2px 7px rgba(0,0,0,0.55),
+   -3px 2px 5px rgba(0,0,0,0.55),
   /* Bright highlight: up + right */  
    3px -2px 2px rgba(255,255,255,0.25),
 /* Big, obvious drop shadow: down + left */
-   -10px 14px 28px rgba(130,130,130,0.25);
+   -10px 14px 28px rgba(130,130,130,0.65);
 
 }
 .section-title{
   text-shadow:
-    -4px 2px 7px rgba(0,0,0,0.55),
+     -3px 2px 5px rgba(0,0,0,0.55),
   /* Bright highlight: up + right */  
    3px -2px 2px rgba(255,255,255,0.25),
 /* Big, obvious drop shadow: down + left */
-   -10px 14px 28px rgba(130,130,130,0.25);
+   -10px 14px 28px rgba(130,130,130,0.65);
 }
