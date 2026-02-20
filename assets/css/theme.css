@@ -625,9 +625,9 @@ body{
   text-shadow:
    -3px 2px 5px rgba(0,0,0,0.55),
   /* Bright highlight: up + right */  
-   2px -1px 1px rgba(255,255,255,0.45),
+   2px -1px 1px rgba(255,255,255,0.25),
 /* Big, obvious drop shadow: down + left */
-    -5px 6px 12px rgba(30,30,30,0.25);
+    -5px 6px 4px rgba(30,30,30,0.25);
 
 }
 
@@ -1127,3 +1127,4 @@ main{ padding-top: 0.5rem !important; }
 /* Big, obvious drop shadow: down + left */
    -5px 6px 12px rgba(30,30,30,0.25);
 }
+
