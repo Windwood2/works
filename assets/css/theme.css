@@ -748,6 +748,23 @@ figcaption.caption{
   margin-bottom: 0.2rem;
 }
 
+/* Video inside image cards */
+.media-frame{
+  width: 100%;
+  background: var(--mat-bg);
+  padding: var(--t-mat-pad);
+  border-radius: var(--t-img-radius);
+  border: 1px solid var(--border-soft);
+  overflow: hidden;          /* key: prevents corners/controls from spilling out */
+  margin-bottom: 1.2rem;
+}
+
+.media-video{
+  display: block;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+}
 
 /* =========================================================
    SECRET NAV
