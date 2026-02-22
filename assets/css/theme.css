@@ -724,7 +724,7 @@ body{
   background-color: var(--mat-bg);
   padding: var(--t-mat-pad);
   border-radius: var(--t-img-radius);
-  margin-bottom: 1.7rem;
+  margin-bottom: 0.9rem;
   border: 1px solid var(--border-soft);
   cursor: zoom-in;
 }
@@ -739,6 +739,7 @@ figcaption.caption{
   padding-left: var(--t-caption-pad-x);
   padding-right: var(--t-caption-pad-x);
   max-width: var(--t-caption-max);
+  margin-bottom: 0.5rem;
   margin-left: auto;
   margin-right: auto;
 }
@@ -746,6 +747,16 @@ figcaption.caption{
 .image-card p{
   margin-top: 0.2rem;
   margin-bottom: 0.2rem;
+}
+
+@media (min-width: 821px){
+  .image-card img.portrait{
+    max-height: 70vh;   /* tweak 60–75vh */
+    width: auto;
+    margin-left: auto;
+    margin-right: auto;
+    object-fit: contain;
+  }
 }
 
 /* Video inside image cards */
