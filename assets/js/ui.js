@@ -151,6 +151,35 @@
     overlay.addEventListener('click', (e) => {
       if (e.target === overlay) close();
     });
+	
+	
   }
+  /*  Volume control for videos*/
+  
+ document.addEventListener("DOMContentLoaded", function () {
+  const vid = document.getElementById("doodlesVideo");
+  if (!vid) return; // safely do nothing on other pages
+
+  // Start at 10% volume
+  vid.volume = 0.1;
+
+  // Pause when mostly out of view
+  if ("IntersectionObserver" in window) {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting || entry.intersectionRatio < 0.2) {
+          vid.pause();
+        }
+      });
+    }, { threshold: [0, 0.2, 1] });
+
+    observer.observe(vid);
+  }
+
+  // Pause when browser tab/window is hidden
+  document.addEventListener("visibilitychange", function () {
+    if (document.hidden) vid.pause();
+  });
+});
 
 })();

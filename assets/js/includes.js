@@ -108,7 +108,9 @@
 // Load head, header, footer
 await loadHead(base + 'includes/head.html');
 await loadFragment(base + 'includes/header.html', '#site-header');
+await loadFragment(base + 'includes/secret-nav.html', '#secret-nav');
 await loadFragment(base + 'includes/footer.html', '#site-footer');
+
 
 // Initialize AFTER injection
 if (window.initWindwoodUI) window.initWindwoodUI();

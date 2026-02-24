@@ -47,46 +47,60 @@
     });
   }
 
-  function placeWithLimit(cw, ch, w, h, placed) {
-    const pad = 10;
-    const tries = 140;
+function placeWithLimit(cw, ch, w, h, placed, yMin = 0, yMax = null) {
+  const pad = 10;
+  const tries = 180;
+  if (yMax == null) yMax = ch - h;
 
-    for (let i = 0; i < tries; i++) {
-      const peekPx = 30;
-      const x = clamp(rand(0, cw - w), pad, Math.max(pad, cw - w - pad));
-      const y = clamp(rand(0, ch - h), pad, Math.max(pad, ch - h - pad));
-      const rect = { x, y, w, h };
-	  // Soft spacing bias — avoid tight clustering
-const MIN_DIST = 170; // increase = more even spread
+  const safeYMin = clamp(yMin, pad, Math.max(pad, ch - h - pad));
+  const safeYMax = clamp(yMax, pad, Math.max(pad, ch - h - pad));
 
-const tooClose = placed.some(p => {
-  const dx = (p.x + p.w / 2) - (x + w / 2);
-  const dy = (p.y + p.h / 2) - (y + h / 2);
-  return Math.hypot(dx, dy) < MIN_DIST;
-});
+  for (let i = 0; i < tries; i++) {
+    const peekPx = 30;
 
-if (tooClose) continue;
+    const x = clamp(rand(0, cw - w), pad, Math.max(pad, cw - w - pad));
+    const y = clamp(
+      rand(Math.min(safeYMin, safeYMax), Math.max(safeYMin, safeYMax)),
+      pad,
+      Math.max(pad, ch - h - pad)
+    );
 
+    const rect = { x, y, w, h };
 
-      if (!edgePeekOK(rect, placed, peekPx)) continue;
+    // Soft spacing bias — avoid tight clustering
+    const MIN_DIST = 240; // tune this
+    const tooClose = placed.some(p => {
+      const dx = (p.x + p.w / 2) - (x + w / 2);
+      const dy = (p.y + p.h / 2) - (y + h / 2);
+      return Math.hypot(dx, dy) < MIN_DIST;
+    });
+    if (tooClose) continue;
 
-      const maxCover = placed.reduce(
-        (m, p) => Math.max(m, overlapArea(rect, p) / (w * h)),
-        0
-      );
+    if (!edgePeekOK(rect, placed, peekPx)) continue;
 
-      if (maxCover < 0.40) return rect;
-    }
+    const maxCover = placed.reduce(
+      (m, p) => Math.max(m, overlapArea(rect, p) / (w * h)),
+      0
+    );
 
-    // Fallback: stepped stack so it's never lost
-    const step = 28;
-    const idx = placed.length;
-    return {
-      x: 14 + (idx * step) % Math.max(14, (cw - w - 28)),
-      y: 14 + (idx * step) % Math.max(14, (ch - h - 28)),
-      w, h
-    };
+    if (maxCover < 0.30) return rect; // tune this
   }
+
+  // Fallback: still honor y band if possible
+  const step = 28;
+  const idx = placed.length;
+  const fallbackY = clamp(
+    (safeYMin + ((idx * step) % Math.max(1, (safeYMax - safeYMin + 1)))),
+    pad,
+    Math.max(pad, ch - h - pad)
+  );
+
+  return {
+    x: 14 + (idx * step) % Math.max(14, (cw - w - 28)),
+    y: fallbackY,
+    w, h
+  };
+}
 
   // -------------------------
   // Viewer (page-only)
@@ -185,7 +199,7 @@ if (tooClose) continue;
 
     img.src = item.src;
     img.alt = item.caption || "";
-    cap.textContent = item.caption || "";
+    if (cap) cap.textContent = item.caption || "";
 
     resetZoom(); // ✅ always reset on image change
   };
@@ -275,7 +289,17 @@ if (tooClose) continue;
         const w = rectNow.width || 260;
         const h = rectNow.height || 180;
 
-        const pos = placeWithLimit(cw, ch, w, h, placed);
+        // Spread images down the page by assigning each one a vertical band
+		const n = imgs.length;
+		const bandTop = (idx / n) * Math.max(0, ch - h);
+		const bandBottom = ((idx + 1) / n) * Math.max(0, ch - h);
+
+		// Add some looseness so it still feels organic
+		const bandPad = 60;
+		const yMin = Math.max(0, bandTop - bandPad);
+		const yMax = Math.min(ch - h, bandBottom + bandPad);
+
+		const pos = placeWithLimit(cw, ch, w, h, placed, yMin, yMax);
         placed.push(pos);
 
         img.style.left = `${pos.x}px`;
@@ -297,7 +321,7 @@ if (tooClose) continue;
 
         img.addEventListener("click", () => {
           lift();
-          viewer._openAt(items, idx);resetZoom();
+          viewer._openAt(items, idx);
 
         });
       });

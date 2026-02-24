@@ -758,6 +758,25 @@ figcaption.caption{
     object-fit: contain;
   }
 }
+/* video in doodles gallery*/
+
+.video-card {
+  padding: 0;
+  overflow: hidden;
+}
+
+.gallery-video {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: 75vh; /* keeps tall portrait videos from getting too huge */
+  background: #999;
+  border-radius: inherit;
+}
+
+.video-card figcaption {
+  padding: 0.8rem 1rem 1rem;
+}
 
 /* Video inside image cards */
 .media-frame{
@@ -927,8 +946,8 @@ figcaption.caption{
   z-index: 5;
   overflow: visible;
   width: 100%;
-  height: 1400px;
-  max-height: 2200px;
+  height: 2200px;
+  max-height: 2600px;
   margin: 0 auto;
 }
 
@@ -936,7 +955,7 @@ figcaption.caption{
   position: absolute;
   z-index: 10;
 
-  width: 420px;
+  width: 380px;
   background: rgba(73,86,59,1.0);   /* image mat color*/
   padding: 6px;
   border: 1px solid var(--border-soft);
@@ -950,7 +969,7 @@ figcaption.caption{
 }
 
 @media (max-width: 820px){
-  #cascade-container{ height: 1000px; }
+  #cascade-container{ height: 1200px; }
   .cascade-img{ width: 240px; }
 }
 
