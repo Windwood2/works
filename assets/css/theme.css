@@ -1166,6 +1166,23 @@ main{ padding-top: 0.5rem !important; }
 
 }
 
+.video-embed{
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background: var(--mat-bg);
+  border: 1px solid var(--border-soft);
+  border-radius: var(--t-img-radius);
+  overflow: hidden;
+  margin-bottom: 1.2rem;
+}
+.video-embed iframe{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+}
+
 .section-title{
   text-shadow:
      -3px 2px 5px rgba(0,0,0,0.55),
