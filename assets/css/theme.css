@@ -1177,12 +1177,13 @@ main{ padding-top: 0.5rem !important; }
   margin-bottom: 1.2rem;
 }
 .video-embed iframe{
-  position:absolute;
-  inset:0;
-  width:100%;
-  height:100%;
+  position: absolute;
+  inset: var(--t-mat-pad);
+  width: calc(100% - (2 * var(--t-mat-pad)));
+  height: calc(100% - (2 * var(--t-mat-pad)));
+  border: 0;
+  border-radius: calc(var(--t-img-radius) - 4px);
 }
-
 .section-title{
   text-shadow:
      -3px 2px 5px rgba(0,0,0,0.55),
