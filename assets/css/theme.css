@@ -1193,3 +1193,11 @@ main{ padding-top: 0.5rem !important; }
    -5px 6px 12px rgba(30,30,30,0.25);
 }
 
+/* Companion music site */
+.nav-links .companion-link, .mobile-nav .companion-link { color: var(--text-primary); }
+.companion-link span, .companion-credit span { font-size: .85em; }
+.footer .companion-credit { margin: .75rem 0 0; }
+.companion-credit a { color: var(--text-primary); text-decoration: none; }
+.companion-credit a:hover { text-decoration: underline; }
+.companion-link:focus-visible, .companion-credit a:focus-visible { outline: 2px solid var(--text-primary); outline-offset: 5px; }
+
